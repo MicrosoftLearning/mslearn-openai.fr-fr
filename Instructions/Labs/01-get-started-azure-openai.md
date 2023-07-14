@@ -35,146 +35,97 @@ Azure OpenAI fournit un portail web appelé **Azure OpenAI Studio**, que vous po
 
 1. Dans la page **Vue d’ensemble** de votre ressource Azure OpenAI, utilisez le bouton **Explorer** pour ouvrir Azure OpenAI Studio sous un nouvel onglet du navigateur.
 2. Dans Azure OpenAI Studio, créez un déploiement avec les paramètres suivants :
-    - **Nom du modèle** : text-davinci-003
-    - **Nom du déploiement** : text-davinci
+    - **Modèle** : gpt-35-turbo
+    - **Version du modèle** : Mise à jour automatique avec la valeur par défaut
+    - **Nom du déploiement** : my-gpt-model
 
-> **Remarque** : Azure OpenAI comprend plusieurs modèles, chacun optimisé pour un équilibre différent entre les fonctionnalités et les performances. Dans cet exercice, vous allez commencer par le modèle **Davinci** de la famille **GPT-3** de modèles de génération de texte. **text-davinci-003** est un bon modèle général pour résumer et générer du langage naturel. Pour plus d’informations sur les modèles disponibles dans Azure OpenAI, consultez [Modèles](https://learn.microsoft.com/azure/cognitive-services/openai/concepts/models) dans la documentation Azure OpenAI.
+> **Remarque** : Azure OpenAI comprend plusieurs modèles, chacun optimisé pour un équilibre différent entre les fonctionnalités et les performances. Dans cet exercice, vous allez utiliser le modèle **GPT-35-Turbo**, qui est un bon modèle général pour résumer et générer du langage naturel et du code. Pour plus d’informations sur les modèles disponibles dans Azure OpenAI, consultez [Modèles](https://learn.microsoft.com/azure/cognitive-services/openai/concepts/models) dans la documentation Azure OpenAI.
 
 ## Explorer un modèle dans le terrain de jeu Complétions
 
 Les *terrains de jeu* sont des interfaces utiles dans Azure OpenAI Studio que vous pouvez utiliser pour expérimenter vos modèles déployés sans avoir à développer votre propre application cliente.
 
 1. Dans Azure OpenAI Studio, dans le volet gauche sous **Terrain de jeu**, sélectionnez **Complétions**.
-2. Dans la page **Complétions**, vérifiez que votre déploiement **text-davinci** est sélectionné, puis dans la liste **Exemples**, sélectionnez **Résumer un article (abstrait)** .
+2. Dans la page **Complétions**, vérifiez que votre déploiement **my-gpt-model** est sélectionné, puis dans la liste **Exemples**, sélectionnez **Générer un questionnaire**.
 
-    L’exemple de texte de synthèse se compose d’un *prompt* qui fournit du texte commençant par la ligne **Fournir un résumé du texte ci-dessous...** . Le fait de commencer le prompt avec cette phrase indique au modèle de résumer le bloc de texte suivant.
+    L’exemple de texte de synthèse se compose d’un *prompt* qui fournit du texte pour indiquer au modèle quel type de réponse est requis et inclure des informations contextuelles.
 
 3. En bas de la page, notez le nombre de *tokens* détectés dans le texte. Les tokens sont les unités de base d’un prompt : essentiellement des mots ou des parties de mots dans le texte.
 4. Utilisez le bouton **Générer** pour soumettre le prompt au modèle et récupérer une réponse.
 
-    La réponse se compose d’un résumé du texte original. Le résumé doit communiquer les points clés du texte original avec moins de détails.
+    La réponse se compose d’un questionnaire basé sur l’exemple dans le prompt.
 
 5. Utilisez le bouton **Regénérer** pour resoumettre le prompt et notez que la réponse peut varier de la réponse d’origine. Un modèle d’IA générative peut produire un nouveau texte chaque fois qu’il est appelé.
-6. Sous la réponse résumée, ajoutez une nouvelle ligne et entrez le texte suivant :
+6. Utilisez le bouton **Afficher le code** pour voir le code qu’une application cliente utiliserait pour envoyer le prompt. Vous pouvez sélectionner votre langage de programmation préféré. Le prompt contient le texte que vous avez soumis au modèle. La demande est envoyée à l’API *Completions* pour votre instance Azure OpenAI Service.
 
-    *Quels progrès l’IA a-t-elle réalisés ?*
+## Utiliser le terrain de jeu Conversation
 
-7. Utilisez le bouton **Générer** pour soumettre le nouveau prompt et passer en revue la réponse. Le prompt et la réponse précédents fournissent un contexte dans un dialogue continu avec le modèle, ce qui permet au modèle de générer une réponse appropriée à votre question.
-8. Remplacez la totalité du contenu du prompt par le texte suivant :
+Le terrain de jeu *Conversation* fournit une interface de chatbot pour les modèles GPT 3.5 et ultérieurs. Il utilise l’API *ChatCompletions* plutôt que l’ancienne API *Completions*.
 
-    *Fournir un résumé du texte ci-dessous qui capture son idée principale.* 
-    
-    *Azure OpenAI Service fournit à l’API REST un accès aux puissants modèles de langage d’OpenAI, y compris les séries de modèles GPT-4, Codex et Embeddings. Ces modèles peuvent être facilement adaptés à votre tâche spécifique, notamment la génération de contenu, la synthèse, la recherche sémantique et la traduction de langage naturel en code. Les utilisateurs peuvent accéder au service via les API REST, le SDK Python ou notre interface web dans Azure OpenAI Studio.*
+1. Dans la section **Terrain de jeu**, sélectionnez la page **Conversation** et vérifiez que le modèle **my-gpt-model** est sélectionné dans le volet de configuration à droite.
+2. Dans la section **Configuration de l’Assistant**, dans la zone **Message système**, remplacez le texte actuel par l’instruction suivante : `The system is an AI teacher that helps people learn about AI`.
 
-9. Utilisez le bouton **Générer** pour soumettre le nouveau prompt et vérifier que le modèle résume correctement le texte.
+3. Sous la zone **Message système**, cliquez sur **Ajouter des exemples en peu de coups**, puis entrez le message et la réponse suivants dans les zones désignées :
 
-## Utiliser un modèle pour classifier du texte
-
-Jusqu’à présent, vous avez vu comment utiliser un modèle pour résumer du texte. Toutefois, les modèles génératifs dans Azure OpenAI peuvent prendre en charge différents types de tâches. Explorons un autre exemple : la *classification de texte*.
-
-1. Dans la page **Complétions**, vérifiez que votre déploiement **text-davinci** est sélectionné, puis dans la liste **Exemples**, sélectionnez **Classifier le texte**.
-
-    L’exemple de prompt de classification de texte décrit le contexte du modèle sous la forme d’une instruction permettant de classifier un article de presse dans l’une des catégories. Il fournit ensuite le texte de l’article de presse (préfixé par *Article de presse :* ) et se termine par *Catégorie classifiée :* . L’intention est que le modèle « complète » la dernière ligne du prompt en prédisant la catégorie appropriée.
-
-2. Utilisez le bouton **Générer** pour soumettre le prompt au modèle et récupérer une réponse. Le modèle doit prédire une catégorie appropriée pour l’article de presse.
-3. Sous la catégorie prédite, ajoutez le texte suivant :
-
-    *article de presse : Microsoft sort Azure OpenAI Service. Microsoft Corporation publie un service Azure qui met les modèles OpenAI à disposition des développeurs d’applications qui créent des applications et des services dans le cloud Azure.*
-
-    *Catégorie classifiée :*
-
-4. Utilisez le bouton **Générer** pour continuer le dialogue avec le modèle et générer une catégorisation appropriée pour le nouvel article de presse.
-
-## Explorer les prompts et les paramètres
-
-Jusqu’à présent, vous avez basé vos prompts sur des exemples fournis dans Azure OpenAI Studio. Essayons quelque chose de différent.
-
-1. Remplacez tout le texte dans la zone du prompt par le texte suivant :
-
-    *Vous êtes enseignant et vous créez un contrôle d’évaluation pour vos élèves.*
-
-    *Écrire trois questions à choix multiples en fonction du texte suivant.*
-
-    *La plupart des solutions de vision par ordinateur sont basées sur des modèles Machine Learning qui peuvent être appliqués à l’entrée visuelle des caméras, des vidéos ou des images.*
-
-    *\- La classification d’images implique l’entraînement d’un modèle Machine Learning pour classifier les images en fonction de leur contenu. Par exemple, dans une solution de surveillance de la circulation, vous pouvez utiliser un modèle de classification d’images pour classifier les images en fonction du type de véhicule qu’elles contiennent, comme les taxis, les bus, les cyclistes, etc.*
-
-    *\- Les modèles Machine Learning de détection d’objets sont entraînés pour classifier des objets individuels au sein d’une image et identifier leur emplacement avec un encadré. Par exemple, une solution de surveillance de la circulation peut utiliser la détection d’objets pour identifier l’emplacement de différentes classes de véhicules.*
-
-    *\- La segmentation sémantique est une technique de Machine Learning avancée où chaque pixel de l’image est classifié en fonction de l’objet auquel il appartient. Par exemple, une solution de surveillance de la circulation peut superposer des images de circulation avec des couches « masques » pour mettre en évidence différents véhicules à l’aide de couleurs spécifiques.*
-
-2. Dans le volet **Paramètres**, définissez les valeurs de paramètre suivantes :
-    - **Température** : 0
-    - **Longueur maximale (tokens)**  : 500
-    - **Texte de pré-réponse** : questions générées automatiquement. Valider avant utilisation dans un contrôle d’évaluation :
-3. Utilisez le bouton **Générer** pour soumettre le prompt et passer en revue les résultats, qui doivent se composer de la valeur dans le paramètre de *texte de pré-réponse*, suivie de questions à choix multiples qu’un enseignant peut utiliser pour évaluer les élèves sur les sujets de vision par ordinateur du prompt. La totalité de la réponse doit être inférieure à la longueur maximale que vous avez spécifiée en tant que paramètre.
-
-    Observez ce qui suit concernant le prompt et les paramètres que vous avez utilisés :
-
-    - Le prompt contient des informations de contexte en langage naturel qui indiquent au modèle comment se comporter. Plus précisément, il indique que le modèle doit assumer le rôle d’un enseignant qui crée un contrôle d’évaluation pour les élèves.
-    - Les paramètres comprennent *Température*, qui contrôle le degré d’aléatoire inclus dans la génération de réponse. La valeur **0** utilisée dans votre soumission réduit le caractère aléatoire au minimum, ce qui donne des réponses stables et prévisibles.
-
-4. Utilisez le bouton **Regénérer** pour regénérer la réponse. Elle doit être similaire à la réponse précédente.
-5. Remplacez la valeur du paramètre **Température** par **0,9**, puis utilisez le bouton **Regénérer** pour regénérer la réponse. Cette fois, l’augmentation du degré d’aléatoire devrait entraîner une réponse différente. Toutefois, les questions sont plus susceptibles de contenir des inexactitudes que celles de la réponse générée précédemment.
-
-## Explorer la génération de code
-
-Le modèle **text-davinci** que vous avez déployé est un bon modèle général qui peut gérer la plupart des tâches. Toutefois, dans certains cas, il est préférable de choisir un modèle optimisé pour un type de tâche spécifique. Par exemple, les modèles Azure OpenAI peuvent être utilisés pour générer du code informatique plutôt que du texte en langage naturel. Certains modèles sont d’ailleurs optimisés pour cette tâche.
-
-1. Dans Azure OpenAI Studio, affichez la page **Modèles** qui contient la liste de tous les modèles disponibles dans votre ressource Azure OpenAI Service.
-2. Sélectionnez le modèle **code-davinci-002** et utilisez le bouton **Déployer le modèle** pour le déployer avec le nom de déploiement **code-davinci**.
-3. Une fois le déploiement terminé, dans Azure OpenAI Studio, consultez la page **Déploiements** qui contient la liste des modèles que vous avez déployés.
-4. Sélectionnez le déploiement du modèle **code-davinci** et utilisez le bouton **Ouvrir dans le terrain de jeu** pour l’ouvrir dans le terrain de jeu.
-5. Dans la page **Complétions**, vérifiez que votre déploiement **code-davinci** est sélectionné, puis dans la liste **Exemples**, sélectionnez **Langage naturel en SQL**.
-
-    L’exemple de prompt de traduction de langage naturel en SQL fournit les détails des tables d’une base de données, ainsi qu’une description de la requête requise, suivie du mot clé `SELECT`. L’intention est que le modèle complète l’instruction `SELECT` pour créer une requête répondant à ce qui est demandé.
-
-6. Utilisez le bouton **Générer** pour soumettre le prompt au modèle et récupérer une réponse qui se compose d’une requête `SELECT` SQL.
-7. Remplacez l’intégralité du prompt et de la réponse par le nouveau prompt suivant :
-
-    *# Python 3*
-
-    *# Créer une fonction pour imprimer « Hello » et une chaîne spécifiée*
-
-    *def print_hello(s):*
-
-8. Utilisez le bouton **Générer** pour soumettre le prompt et afficher le code qui est généré. Le prompt comprenait une indication du langage de programmation à générer (Python 3), un commentaire décrivant la fonctionnalité souhaitée et la première partie de la définition de la fonction. Le modèle **code-davinci** doit avoir complété la fonction avec le code Python approprié.
-
-## Explorer les modèles de conversation
-
-ChatGPT est un chatbot développé par OpenAI qui peut fournir une grande variété de réponses en langage naturel dans un scénario conversationnel. Le modèle utilisé par ChatGPT et les API pour son utilisation sont inclus dans Azure OpenAI.
-
-1. Dans Azure OpenAI Studio, affichez la page **Modèles** qui contient la liste de tous les modèles disponibles dans votre ressource Azure OpenAI Service.
-2. Sélectionnez le modèle **gpt-35-turbo** et utilisez le bouton **Déployer le modèle** pour le déployer avec le nom de déploiement **gpt-chat**.
-3. Une fois le modèle déployé, dans la section **Terrain de jeu**, sélectionnez la page **Conversation** et vérifiez que le modèle **gpt-chat** est sélectionné dans le volet de droite.
-4. Dans la section **Configuration de l’Assistant**, dans la zone **Message système**, remplacez le texte actuel par ce qui suit :
-
-    *Le système est un enseignant d’IA qui aide les gens à apprendre l’IA*
-
-5. Sous la zone **Message système**, cliquez sur **Ajouter des exemples en peu de coups**, puis entrez le message et la réponse suivants dans les zones désignées :
-
-    Utilisateur : *Quels sont les différents types d’intelligence artificielle ?*
-
-    Assistant : *Il existe trois principaux types d’intelligence artificielle : l’IA étroite ou faible (par exemple, les assistants virtuels comme Siri ou Alexa, les logiciels de reconnaissance d’images et les filtres de courrier indésirable), l’IA générale ou forte (IA conçue pour être aussi intelligente qu’un être humain). Ce type d’IA n’existe pas actuellement et est purement théorique), et la superintelligence artificielle (IA qui est plus intelligente que tout être humain et qui peut effectuer des tâches qui dépassent la compréhension humaine. Ce type d’IA est également purement théorique et n’a pas encore été développé).*
+    - **Utilisateur** : `What are different types of artificial intelligence?`
+    - **Assistant** : `There are three main types of artificial intelligence: Narrow or Weak AI (such as virtual assistants like Siri or Alexa, image recognition software, and spam filters), General or Strong AI (AI designed to be as intelligent as a human being. This type of AI does not currently exist and is purely theoretical), and Artificial Superintelligence (AI that is more intelligent than any human being and can perform tasks that are beyond human comprehension. This type of AI is also purely theoretical and has not yet been developed).`
 
     > **Remarque** : Des exemples peu nombreux (« few-shot examples ») sont utilisés pour fournir au modèle des exemples de types de réponses attendues. Le modèle tente de refléter le ton et le style des exemples dans ses propres réponses.
 
-6. Enregistrez les modifications pour démarrer une nouvelle session et définir le contexte comportemental du système de conversation.
-
-7. Dans la zone de requête en bas de la page, entrez le texte suivant :
-
-    *Qu’est-ce que l’intelligence artificielle ?*
-
-8. Utilisez le bouton **Envoyer** pour envoyer le message et afficher la réponse.
+4. Enregistrez les modifications pour démarrer une nouvelle session et définir le contexte comportemental du système de conversation.
+5. Dans la zone de la requête, en bas de la page, entrez le texte `What is artificial intelligence?`
+6. Utilisez le bouton **Envoyer** pour envoyer le message et afficher la réponse.
 
     > **Remarque** : Vous pouvez recevoir une réponse indiquant que le déploiement de l’API n’est pas encore prêt. Si tel est le cas, patientez quelques minutes et réessayez.
 
-9. Examinez la réponse, puis envoyez le message suivant pour poursuivre la conversation :
+7. Examinez la réponse, puis envoyez le message suivant pour poursuivre la conversation : `How is it related to machine learning?`
+8. Examinez la réponse et notez que le contexte de l’interaction précédente a été retenu (de sorte que le modèle comprend que « it » fait référence à l’intelligence artificielle).
+9. Utilisez le bouton **Afficher le code** pour voir le code de l’interaction. Le prompt se compose du message *système*, d’un petit nombre d’exemples de messages de l’*utilisateur* et de l’*assistant*, ainsi que de la séquence des messages de l’*utilisateur* et de l’*assistant* dans la session de conversation.
 
-    *Quel rapport a-t-elle avec le machine learning ?*
+## Explorer les prompts et les paramètres
 
-10. Examinez la réponse et notez que le contexte de l’interaction précédente a été retenu (de sorte que le modèle comprend que « elle » fait référence à l’intelligence artificielle).
+Vous pouvez utiliser le prompt et les paramètres pour optimiser la probabilité de générer la réponse dont vous avez besoin.
 
-Dans cet exercice, vous avez appris à provisionner Azure OpenAI Service dans un abonnement Azure et à utiliser Azure OpenAI Studio pour déployer et explorer des modèles.
+1. Dans le volet **Paramètres**, définissez les valeurs de paramètre suivantes :
+    - **Température** : 0
+    - **Longueur maximale (tokens)**  : 500
 
-En tant que développeur, vous pouvez utiliser les API REST spécifiques au langage pour créer des applications et des services qui consomment des modèles Azure OpenAI, ce qui vous permet de tirer parti des modèles d’IA générative dans vos propres applications. Le codage sur Azure OpenAI est abordé dans d’autres exercices.
+2. Soumettre le message suivant
+
+    ```
+    Write three multiple choice questions based on the following text.
+
+    Most computer vision solutions are based on machine learning models that can be applied to visual input from cameras, videos, or images.*
+
+    - Image classification involves training a machine learning model to classify images based on their contents. For example, in a traffic monitoring solution you might use an image classification model to classify images based on the type of vehicle they contain, such as taxis, buses, cyclists, and so on.*
+
+    - Object detection machine learning models are trained to classify individual objects within an image, and identify their location with a bounding box. For example, a traffic monitoring solution might use object detection to identify the location of different classes of vehicle.*
+
+    - Semantic segmentation is an advanced machine learning technique in which individual pixels in the image are classified according to the object to which they belong. For example, a traffic monitoring solution might overlay traffic images with "mask" layers to highlight different vehicles using specific colors.
+    ```
+
+3. Passez en revue les résultats, qui devraient se composer de questions à choix multiples qu’un enseignant pourrait utiliser pour évaluer les étudiants sur les sujets de vision par ordinateur du prompt. La totalité de la réponse doit être inférieure à la longueur maximale que vous avez spécifiée en tant que paramètre.
+
+    Observez ce qui suit concernant le prompt et les paramètres que vous avez utilisés :
+
+    - Le prompt indique spécifiquement que la sortie souhaitée doit être trois questions à choix multiples.
+    - Les paramètres comprennent *Température*, qui contrôle le degré d’aléatoire inclus dans la génération de réponse. La valeur **0** utilisée dans votre soumission réduit le caractère aléatoire au minimum, ce qui donne des réponses stables et prévisibles.
+
+## Explorer la génération de code
+
+En plus de générer des réponses en langage naturel, vous pouvez utiliser des modèles GPT pour générer du code.
+
+1. Dans le volet **Configuration de l’Assistant**, sélectionnez le modèle **Exemple vide** pour réinitialiser le message système.
+2. Entrez le message système : `You are a Python developer.` et enregistrez les modifications.
+3. Dans le volet **Session de conversation**, sélectionnez **Effacer la conversation** pour effacer l’historique des conversations et démarrer une nouvelle session.
+4. Envoyez le message utilisateur suivant :
+
+    ```
+    Write a Python function named Multiply that multiplies two numeric parameters.
+    ```
+
+5. Passez en revue la réponse, qui devrait inclure un exemple de code Python répondant à la demande du prompt.
+
+## Nettoyage
+
+Lorsque vous avez terminé avec votre ressource Azure OpenAI, n’oubliez pas de supprimer le déploiement ou l’intégralité de la ressource dans le [portail Azure](https://portal.azure.com).

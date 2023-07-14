@@ -36,7 +36,8 @@ Pour utiliser l’API Azure OpenAI pour générer du code, vous devez d’abord 
 
 1. Dans la page **Vue d’ensemble** de votre ressource Azure OpenAI, utilisez le bouton **Explorer** pour ouvrir Azure OpenAI Studio sous un nouvel onglet du navigateur. Vous pouvez aussi accéder à [Azure OpenAI Studio](https://oai.azure.com/?azure-portal=true) directement.
 2. Dans Azure OpenAI Studio, créez un déploiement avec les paramètres suivants :
-    - **Nom du modèle** : gpt-35-turbo
+    - **Modèle** : gpt-35-turbo
+    - **Version du modèle** : *Utiliser la version par défaut*
     - **Nom du déploiement** : 35turbo
 
 > **Remarque** : Chaque modèle Azure OpenAI est optimisé pour un équilibre différent entre les fonctionnalités et les performances. Dans cet exercice, nous allons utiliser la série de modèles **3.5 Turbo** de la famille de modèles **GPT-3**, qui présente de grandes capacités à comprendre le langage et le code.

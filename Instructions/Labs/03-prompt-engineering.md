@@ -40,7 +40,8 @@ Pour utiliser l’API Azure OpenAI, vous devez d’abord déployer un modèle à
 
 1. Dans la page **Vue d’ensemble** de votre ressource Azure OpenAI, utilisez le bouton **Explorer** pour ouvrir Azure OpenAI Studio sous un nouvel onglet du navigateur. Vous pouvez aussi accéder à [Azure OpenAI Studio](https://oai.azure.com/?azure-portal=true) directement.
 2. Dans Azure OpenAI Studio, créez un déploiement avec les paramètres suivants :
-    - **Nom du modèle** : gpt-35-turbo
+    - **Modèle** : gpt-35-turbo
+    - **Version du modèle** : *Utiliser la version par défaut*
     - **Nom du déploiement** : text-turbo
 
 > **Remarque** : Chaque modèle Azure OpenAI est optimisé pour un équilibre différent entre les fonctionnalités et les performances. Dans cet exercice, nous allons utiliser la série de modèles **3.5 Turbo** de la famille de modèles **GPT-3**, qui présente de grandes capacités à comprendre le langage. Cet exercice n’utilise qu’un seul modèle, mais le déploiement et l’utilisation d’autres modèles que vous déployez fonctionnent de la même manière.
