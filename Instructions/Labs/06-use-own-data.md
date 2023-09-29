@@ -80,17 +80,19 @@ Ensuite, ajoutez vos données dans le terrain de jeu de conversation pour voir c
     - **Niveau tarifaire** : De base
 
 1. Attendez que votre ressource de recherche ait été déployée, puis revenez à Azure AI Studio et actualisez la page.
-1. Dans **Ajouter des données**, entrez les valeurs suivantes pour votre source de données.
+1. Dans **Ajouter des données**, entrez les valeurs suivantes pour votre source de données, puis sélectionnez **Suivant**.
 
     - **Sélectionner la source de données** : Charger des fichiers
     - **Sélectionner la ressource Stockage Blob Azure** : *choisissez la ressource de stockage que vous avez créée*
         - Activer CORS à l’invite
     - **Sélectionner la ressource Recherche cognitive Azure** : *choisissez la ressource de recherche que vous avez créée*
     - **Entrez le nom de l’index** : margiestravel
-    - Cochez la case.
+    - **Ajouter la recherche vectorielle à cette ressource de recherche** : décochée
+    - **Je reconnais que la connexion à un compte Recherche cognitive Azure entraîne l’utilisation de mon compte** : coché
 
-1. Dans la page **Charger des fichiers**, chargez les fichiers PDF que vous avez téléchargés.
-1. Sélectionnez **Enregistrer et fermer** pour ajouter vos données. Cette opération peut prendre quelques minutes, pendant lesquelles vous devez laisser votre fenêtre ouverte. Une fois l’opération terminée, vous verrez la source de données, la ressource de recherche et l’index spécifiés dans le volet **Configuration de l’Assistant**.
+1. Dans la page **Charger des fichiers**, chargez les fichiers PDF téléchargés, puis sélectionnez **Suivant**.
+1. Dans la page **Gestion des données**, sélectionnez le type de recherche par **mot clé** dans la liste déroulante, puis **Suivant**.
+1. Dans la page **Vérifier, puis terminer**, sélectionnez **Enregistrer et fermer** pour ajouter vos données. Cette opération peut prendre quelques minutes, pendant lesquelles vous devez laisser votre fenêtre ouverte. Une fois l’opération terminée, vous verrez la source de données, la ressource de recherche et l’index spécifiés dans le volet **Configuration de l’Assistant**.
 
 ## Discuter avec un modèle ancré dans vos données
 
