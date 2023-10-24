@@ -9,8 +9,6 @@ Avec Azure OpenAI Service, les développeurs peuvent créer des chatbots, des mo
 
 Lors de l’utilisation d’Azure OpenAI Service, la façon dont les développeurs formulent leur prompt a un impact considérable sur la façon dont le modèle d’IA générative répond. Les modèles Azure OpenAI sont capables d’adapter et de mettre en forme le contenu, si vous le souhaitez, de manière claire et concise. Dans cet exercice, vous allez découvrir comment différents prompts pour un contenu similaire permettent d’adapter la réponse du modèle d’IA pour mieux répondre à vos besoins.
 
-Imaginez que vous essayez d’envoyer des informations concernant un nouveau sauvetage d’animaux sauvages et que vous souhaitez obtenir de l’aide d’un modèle d’IA générative.
-
 Cet exercice prend environ **25** minutes.
 
 ## Avant de commencer
