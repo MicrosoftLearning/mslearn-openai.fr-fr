@@ -23,7 +23,7 @@ Avant de pouvoir utiliser des modèles Azure OpenAI, vous devez provisionner une
 1. Connectez-vous au [portail Azure](https://portal.azure.com).
 2. Créez une ressource **Azure OpenAI** avec les paramètres suivants :
     - **Abonnement** : Un abonnement Azure qui a été approuvé pour pouvoir accéder à Azure OpenAI Service.
-    - **Groupe de ressources** : Créez un nouveau groupe de ressources en lui attribuant le nom de votre choix.
+    - **Groupe de ressources** : choisissez un groupe de ressources existant ou créez un groupe de ressources en lui attribuant le nom de votre choix.
     - **Région** : Choisissez une région disponible.
     - **Nom** : Un nom unique de votre choix.
     - **Niveau tarifaire** : Standard S0
