@@ -189,7 +189,7 @@ Pour cet exercice, vous allez effectuer certaines parties clés de l’applicati
    openai.api_key = azure_oai_key
     ```
 
-7. Dans la fonction qui appelle le modèle Azure OpenAI, ajoutez le code à mettre en forme et envoyez la demande au modèle.
+7. Dans la fonction qui appelle le modèle Azure OpenAI, ajoutez le code à mettre en forme et envoyez le prompt au modèle.
 
     **C#**
 

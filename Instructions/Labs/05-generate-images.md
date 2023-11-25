@@ -58,11 +58,11 @@ Dans cet exercice, vous allez utiliser une application Python ou C# Microsoft si
 
 2. Lorsque vous ouvrez le service Cloud Shell première fois, il se peut que vous soyez invité à choisir le type d’interpréteur de commandes que vous souhaitez utiliser (*Bash* ou *PowerShell*). Sélectionnez **Bash**. Si vous ne voyez pas cette option, ignorez l’étape.  
 
-3. Si vous êtes invité à créer un stockage pour votre Cloud Shell, sélectionnez **Afficher les paramètres avancés** et sélectionnez les paramètres suivants :
+3. Si vous êtes invité à créer un stockage pour votre Cloud Shell, sélectionnez **Afficher les paramètres avancés** et sélectionnez les paramètres suivants :
     - **Abonnement** : Votre abonnement
-    - **Régions Cloud Shell** : choisissez une région disponible
+    - **Régions Cloud Shell** : choisissez une région disponible
     - **Afficher les paramètres d’isolation de réseau virtuel** Non sélectionné
-    - **Groupe de ressources** : utilisez le groupe de ressources existant dans lequel vous avez approvisionné votre ressource Azure OpenAI
+    - **Groupe de ressources** : utilisez le groupe de ressources existant dans lequel vous avez approvisionné votre ressource Azure OpenAI
     - **Compte de stockage** : créez un compte de stockage avec un nom unique
     - **Partage de fichiers** : créez un partage de fichiers avec un nom unique
 
@@ -70,7 +70,7 @@ Dans cet exercice, vous allez utiliser une application Python ou C# Microsoft si
 
     > **Remarque** : Si vous disposez déjà d’un cloud shell configuré dans votre abonnement Azure, vous devrez peut-être utiliser l’option **Réinitialiser les paramètres utilisateur** dans le menu ⚙️ pour vous assurer que les dernières versions de Python et du .NET Framework sont installées.
 
-4. Vérifiez que le type de shell indiqué en haut à gauche du volet Cloud Shell est *Bash*. Si vous utilisez *PowerShell*, basculez vers *Bash* à l’aide du menu déroulant.
+4. Vérifiez que le type de shell indiqué en haut à gauche du volet Cloud Shell est *Bash*. Si vous utilisez *PowerShell*, basculez vers *Bash* à l’aide du menu déroulant.
 
 5. Une fois que le terminal a démarré, entrez la commande suivante pour télécharger le code d’application que vous allez utiliser.
 
