@@ -34,35 +34,24 @@ Avant de pouvoir utiliser des modèles Azure OpenAI, vous devez provisionner une
 Azure OpenAI fournit un portail web appelé **Azure OpenAI Studio**, que vous pouvez utiliser pour déployer, gérer et explorer des modèles. Vous allez commencer votre exploration d’Azure OpenAI en utilisant Azure OpenAI Studio pour déployer un modèle.
 
 1. Sur la page **Vue d’ensemble** de votre ressource Azure OpenAI, utilisez le bouton **Accéder à Azure OpenAI Studio** pour ouvrir Azure OpenAI Studio sous un nouvel onglet du navigateur.
-2. Dans Azure OpenAI Studio, créez un déploiement avec les paramètres suivants :
-    - **Modèle** : gpt-35-turbo
+2. Dans Azure OpenAI Studio, sur la page **Déploiements**, affichez vos déploiements de modèles existants. Si vous n’en avez pas encore, créez un déploiement du modèle **gpt-35-turbo-16k** avec les paramètres suivants :
+    - **Modèle** : gpt-35-turbo-16k
     - **Version du modèle** : mise à jour automatique avec la valeur par défaut
-    - **Nom du déploiement** : my-gpt-model
+    - **Nom du déploiement** : *nom unique de votre choix*
+    - **Options avancées**
+        - **Filtre de contenu** : valeur par défaut
+        - **Limite de débit de jetons par minute** : 5 000\*
+        - **Activer le quota dynamique** : activé
 
-> **Remarque** : Azure OpenAI comprend plusieurs modèles, chacun optimisé pour un équilibre différent entre les fonctionnalités et les performances. Dans cet exercice, vous allez utiliser le modèle **GPT-35-Turbo**, qui est un bon modèle général pour résumer et générer du langage naturel et du code. Pour plus d’informations sur les modèles disponibles dans Azure OpenAI, consultez [Modèles](https://learn.microsoft.com/azure/cognitive-services/openai/concepts/models) dans la documentation Azure OpenAI.
+    > \* Une limite de débit de 5 000 jetons par minute est plus que suffisante pour effectuer cet exercice tout permettant à d’autres personnes d’utiliser le même abonnement.
 
-## Explorer un modèle dans le terrain de jeu Complétions
-
-Les *terrains de jeu* sont des interfaces utiles dans Azure OpenAI Studio que vous pouvez utiliser pour expérimenter vos modèles déployés sans avoir à développer votre propre application cliente.
-
-1. Dans Azure OpenAI Studio, dans le volet gauche sous **Terrain de jeu**, sélectionnez **Complétions**.
-2. Dans la page **Complétions**, vérifiez que votre déploiement **my-gpt-model** est sélectionné, puis dans la liste **Exemples**, sélectionnez **Générer un questionnaire**.
-
-    L’exemple de texte de synthèse se compose d’un *prompt* qui fournit du texte pour indiquer au modèle quel type de réponse est requis et inclure des informations contextuelles.
-
-3. En bas de la page, notez le nombre de *tokens* détectés dans le texte. Les tokens sont les unités de base d’un prompt : essentiellement des mots ou des parties de mots dans le texte.
-4. Utilisez le bouton **Générer** pour soumettre le prompt au modèle et récupérer une réponse.
-
-    La réponse se compose d’un questionnaire basé sur l’exemple dans le prompt.
-
-5. Utilisez le bouton **Regénérer** pour resoumettre le prompt et notez que la réponse peut varier de la réponse d’origine. Un modèle d’IA générative peut produire un nouveau texte chaque fois qu’il est appelé.
-6. Utilisez le bouton **Afficher le code** pour voir le code qu’une application cliente utiliserait pour envoyer le prompt. Vous pouvez sélectionner votre langage de programmation préféré. L’invite contient le texte que vous avez soumis au modèle. La demande est envoyée à l’API *Completions* pour votre instance Azure OpenAI Service.
+> **Remarque** : dans certaines régions, la nouvelle interface de déploiement de modèle n’affiche pas l’option **Version du modèle**. Dans ce cas, ne vous inquiétez pas et continuez sans définir l’option.
 
 ## Utiliser le terrain de jeu Conversation
 
 Le terrain de jeu *Conversation* fournit une interface de chatbot pour les modèles GPT 3.5 et ultérieurs. Il utilise l’API *ChatCompletions* plutôt que l’ancienne API *Completions*.
 
-1. Dans la section **Terrain de jeu**, sélectionnez la page **Conversation** et vérifiez que le modèle **my-gpt-model** est sélectionné dans le volet de configuration à droite.
+1. Dans la section **Terrain de jeu**, sélectionnez la page **Conversation** et vérifiez que votre modèle est sélectionné dans le volet de configuration.
 2. Dans la section **Configuration de l’Assistant**, dans la zone **Message système**, remplacez le texte actuel par l’instruction suivante : `The system is an AI teacher that helps people learn about AI`.
 
 3. Sous la zone **Message système**, cliquez sur **Ajouter des exemples en peu de coups**, puis entrez le message et la réponse suivants dans les zones désignées :
@@ -88,9 +77,9 @@ Vous pouvez utiliser le prompt et les paramètres pour optimiser la probabilité
 
 1. Dans le volet **Paramètres**, définissez les valeurs de paramètre suivantes :
     - **Température** : 0
-    - **Longueur maximale (tokens)**  : 500
+    - **Réponse maximale** : 500
 
-2. Soumettre le message suivant
+2. Envoyer le message suivant
 
     ```
     Write three multiple choice questions based on the following text.

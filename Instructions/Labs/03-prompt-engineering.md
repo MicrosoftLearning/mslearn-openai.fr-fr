@@ -37,18 +37,25 @@ Avant de pouvoir utiliser des modèles Azure OpenAI, vous devez provisionner une
 Pour utiliser l’API Azure OpenAI, vous devez d’abord déployer un modèle à utiliser via **Azure OpenAI Studio**. Une fois déployé, nous référencerons ce modèle dans notre application.
 
 1. Dans la page **Vue d’ensemble** de votre ressource Azure OpenAI, utilisez le bouton **Explorer** pour ouvrir Azure OpenAI Studio sous un nouvel onglet du navigateur. Vous pouvez aussi accéder à [Azure OpenAI Studio](https://oai.azure.com/?azure-portal=true) directement.
-2. Dans Azure OpenAI Studio, créez un déploiement avec les paramètres suivants :
-    - **Modèle** : gpt-35-turbo
-    - **Version du modèle** : *Utiliser la version par défaut*
-    - **Nom du déploiement** : text-turbo
+2. Dans Azure OpenAI Studio, sur la page **Déploiements**, affichez vos déploiements de modèles existants. Si vous n’en avez pas encore, créez un déploiement du modèle **gpt-35-turbo-16k** avec les paramètres suivants :
+    - **Modèle** : gpt-35-turbo-16k
+    - **Version du modèle** : mise à jour automatique avec la valeur par défaut
+    - **Nom du déploiement** : *nom unique de votre choix*
+    - **Options avancées**
+        - **Filtre de contenu** : valeur par défaut
+        - **Limite de débit de jetons par minute** : 5 000\*
+        - **Activer le quota dynamique** :activé
 
-> **Remarque** : Chaque modèle Azure OpenAI est optimisé pour un équilibre différent entre les fonctionnalités et les performances. Dans cet exercice, nous allons utiliser la série de modèles **3.5 Turbo** de la famille de modèles **GPT-3**, qui présente de grandes capacités à comprendre le langage. Cet exercice n’utilise qu’un seul modèle, mais le déploiement et l’utilisation d’autres modèles que vous déployez fonctionnent de la même manière.
+    > \* Une limite de débit de 5 000 jetons par minute est plus que suffisante pour effectuer cet exercice tout permettant à d’autres personnes d’utiliser le même abonnement.
+
+> **Remarque** : dans certaines régions, la nouvelle interface de déploiement de modèle n’affiche pas l’option **Version du modèle**. Dans ce cas, ne vous inquiétez pas et continuez sans définir l’option.
 
 ## Appliquer le prompt engineering dans le terrain de jeu de conversation
 
 Avant d’utiliser votre application, examinez comment le prompt engineering améliore la réponse du modèle dans le terrain de jeu. Dans ce premier exemple, imaginez que vous essayez d’écrire une application Python d’animaux avec des noms amusants.
 
 1. Dans [Azure OpenAI Studio](https://oai.azure.com/?azure-portal=true), accédez au terrain de jeu **de conversation** dans le volet gauche.
+1. Dans la **Configuration**, vérifiez que votre déploiement de modèle est sélectionné.
 1. Dans la section **Configuration de l’Assistant** en haut, entrez `You are a helpful AI assistant` comme message système.
 1. Dans la section **Session de conversation**, entrez le prompt suivant et appuyez sur *Entrée*.
 
@@ -108,20 +115,20 @@ Avant d’utiliser votre application, examinez comment le prompt engineering am�
     **Utilisateur :**
 
     ```code
-   Joyous moments at the Oscars
-
-   The Oscars this past week where quite something!
-   
-   Though a certain scandal might have stolen the show, this year's Academy Awards were full of moments that filled us with joy and even moved us to tears.
-   These actors and actresses delivered some truly emotional performances, along with some great laughs, to get us through the winter.
-   
-   From Robin Kline's history-making win to a full performance by none other than Casey Jensen herself, don't miss tomorrows rerun of all the festivities.
+    Joyous moments at the Oscars
+    
+    The Oscars this past week where quite something!
+    
+    Though a certain scandal might have stolen the show, this year's Academy Awards were full of moments that filled us with joy and even moved us to tears.
+    These actors and actresses delivered some truly emotional performances, along with some great laughs, to get us through the winter.
+    
+    From Robin Kline's history-making win to a full performance by none other than Casey Jensen herself, don't miss tomorrows rerun of all the festivities.
     ```
 
     **Assistant :**
 
     ```code
-   Entertainment
+    Entertainment
     ```
 
 1. Enregistrez ces modifications dans la configuration de l’Assistant, et envoyez le même prompt sur la sécheresse en Californie, fourni à nouveau ici par souci pratique.
@@ -175,17 +182,19 @@ Pour montrer comment intégrer un modèle Azure OpenAI, nous allons utiliser une
    cd azure-openai/Labfiles/03-prompt-engineering
     ```
 
-    Des applications pour C# et Python sont fournies, ainsi que des fichiers texte qui contiennent les prompts. Les deux applications présentent les mêmes fonctionnalités.
-
-    Ouvrez l’éditeur de code intégré où vous pouvez observer les fichiers de prompts que vous allez utiliser dans `prompts`. Utilisez la commande suivante pour ouvrir les fichiers de labo dans l’éditeur de code.
+7. Ouvrez l’éditeur de code intégré en exécutant la commande suivante :
 
     ```bash
-   code .
+    code .
     ```
+
+8. Dans l’éditeur de code, développez le dossier **prompts** et passez en revue les fichiers texte contenant les invites que votre application enverra au modèle.
+
+    > **Conseil** : consultez la [documentation de l’éditeur de code Azure Cloud Shell](https://learn.microsoft.com/azure/cloud-shell/using-cloud-shell-editor) pour plus d’informations sur son utilisation afin d’utiliser des fichiers dans l’environnement Azure Cloud Shell.
 
 ## Configuration de votre application
 
-Pour cet exercice, vous allez effectuer certaines parties clés de l’application pour activer l’utilisation de votre ressource Azure OpenAI.
+Pour cet exercice, vous allez effectuer certaines parties clés de l’application pour activer l’utilisation de votre ressource Azure OpenAI. Des applications pour C# et Python sont fournies. Les deux applications présentent les mêmes fonctionnalités.
 
 1. Dans l’éditeur de code, développez le dossier **CSharp** ou **Python** en fonction du langage que vous préférez.
 
@@ -194,23 +203,23 @@ Pour cet exercice, vous allez effectuer certaines parties clés de l’applicati
     - C#: `appsettings.json`
     - Python : `.env`
     
-3. Mettez à jour les valeurs de configuration pour inclure le **point de terminaison** et la **clé** de la ressource Azure OpenAI que vous avez créée, ainsi que le nom du modèle que vous avez déployé, `text-turbo`. Enregistrez le fichier .
+3. Mettez à jour les valeurs de configuration pour inclure le **point de terminaison** et la **clé** de la ressource Azure OpenAI que vous avez créée, ainsi que le nom du modèle que vous avez déployé. Enregistrez le fichier.
 
-4. Accédez au dossier de votre langage préféré et installez les packages nécessaires.
+4. Dans le volet de la console, saisissez les commandes suivantes pour accéder au dossier de votre langage préféré et installer les packages nécessaires.
 
     **C#**
 
     ```bash
-   cd CSharp
-   dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.5
+    cd CSharp
+    dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.9
     ```
 
     **Python**
 
     ```bash
-   cd Python
-   pip install python-dotenv
-   pip install openai
+    cd Python
+    pip install python-dotenv
+    pip install openai==1.2.0
     ```
 
 5. Accédez au dossier de votre langage préféré, sélectionnez le fichier de code et ajoutez les bibliothèques nécessaires.
@@ -218,79 +227,78 @@ Pour cet exercice, vous allez effectuer certaines parties clés de l’applicati
     **C#**
 
     ```csharp
-   // Add Azure OpenAI package
-   using Azure.AI.OpenAI;
+    // Add Azure OpenAI package
+    using Azure.AI.OpenAI;
     ```
 
     **Python**
 
     ```python
-   # Add OpenAI import
-   import openai
+    # Add OpenAI import
+    from openai import AzureOpenAI
     ```
 
-5. Ouvrez le code d’application pour votre langage et ajoutez le code nécessaire à la configuration du client.
+6. Ouvrez le code d’application pour votre langage et ajoutez le code nécessaire à la configuration du client.
 
     **C#**
 
     ```csharp
-   // Initialize the Azure OpenAI client
-   OpenAIClient client = new OpenAIClient(new Uri(oaiEndpoint), new AzureKeyCredential(oaiKey));
+    // Initialize the Azure OpenAI client
+    OpenAIClient client = new OpenAIClient(new Uri(oaiEndpoint), new AzureKeyCredential(oaiKey));
     ```
 
     **Python**
 
     ```python
-   # Set OpenAI configuration settings
-   openai.api_type = "azure"
-   openai.api_base = azure_oai_endpoint
-   openai.api_version = "2023-03-15-preview"
-   openai.api_key = azure_oai_key
+    # Initialize the Azure OpenAI client
+    client = AzureOpenAI(
+            azure_endpoint = azure_oai_endpoint, 
+            api_key=azure_oai_key,  
+            api_version="2023-05-15"
+            )
     ```
 
-6. Dans la fonction qui appelle le modèle Azure OpenAI, ajoutez le code à mettre en forme et envoyez le prompt au modèle.
+7. Dans la fonction qui appelle le modèle Azure OpenAI, ajoutez le code à mettre en forme et envoyez le prompt au modèle.
 
     **C#**
 
     ```csharp
-   // Create chat completion options
-   var chatCompletionsOptions = new ChatCompletionsOptions()
-   {
-       Messages =
-       {
-          new ChatMessage(ChatRole.System, systemPrompt),
-          new ChatMessage(ChatRole.User, userPrompt)
-       },
-       Temperature = 0.7f,
-       MaxTokens = 800,
-   };
-
-   // Get response from Azure OpenAI
-   Response<ChatCompletions> response = await client.GetChatCompletionsAsync(
-       oaiModelName,
-       chatCompletionsOptions
-   );
-
-   ChatCompletions completions = response.Value;
-   string completion = completions.Choices[0].Message.Content;
+    // Create chat completion options
+    var chatCompletionsOptions = new ChatCompletionsOptions()
+    {
+        Messages =
+        {
+            new ChatMessage(ChatRole.System, systemPrompt),
+            new ChatMessage(ChatRole.User, userPrompt)
+        },
+        Temperature = 0.7f,
+        MaxTokens = 800,
+        DeploymentName = oaiModelName
+    };
+    
+    // Get response from Azure OpenAI
+    Response<ChatCompletions> response = await client.GetChatCompletionsAsync(chatCompletionsOptions);
+    
+    ChatCompletions completions = response.Value;
+    string completion = completions.Choices[0].Message.Content;
     ```
 
     **Python**
 
     ```python
-   # Build the messages array
-   messages =[
-       {"role": "system", "content": system_message},
-       {"role": "user", "content": user_message},
-   ]
-
-   # Call the Azure OpenAI model
-   response = openai.ChatCompletion.create(
-       engine=model,
-       messages=messages,
-       temperature=0.7,
-       max_tokens=800
-   )
+    # Build the messages array
+    messages =[
+        {"role": "system", "content": system_message},
+        {"role": "user", "content": user_message},
+    ]
+    
+    # Call the Azure OpenAI model
+    response = client.chat.completions.create(
+        model=model,
+        messages=messages,
+        temperature=0.7,
+        max_tokens=800
+    )
     ```
 
 ## Exécuter votre application
