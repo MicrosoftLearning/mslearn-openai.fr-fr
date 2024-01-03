@@ -41,7 +41,7 @@ Pour converser avec Azure OpenAI, vous devez d’abord déployer un modèle à u
     - **Options avancées**
         - **Filtre de contenu** : valeur par défaut
         - **Limite de débit de jetons par minute** : 5 000\*
-        - **Activer le quota dynamique** : activé
+        - **Activer le quota dynamique** :activé
 
     > \* Une limite de débit de 5 000 jetons par minute est plus que suffisante pour effectuer cet exercice tout permettant à d’autres personnes d’utiliser le même abonnement.
 
@@ -71,7 +71,7 @@ Ensuite, ajoutez vos données dans le terrain de jeu de conversation pour voir c
 1. [Téléchargez les données](https://aka.ms/own-data-brochures) que vous utiliserez à partir de GitHub. Extrayez les PDF du fichier `.zip` fourni.
 1. Accédez au terrain de jeu **Conversation**, puis sélectionnez *Ajouter vos données* dans le volet Configuration de l’Assistant.
 1. Sélectionnez **Ajouter une source de données** et choisissez *Charger des fichiers* dans la liste déroulante.
-1. Vous devez créer un compte de stockage et une ressource Recherche cognitive Azure. Dans la liste déroulante de la ressource de stockage, sélectionnez **Créer une ressource de stockage Blob Azure**, puis créez un compte de stockage avec les paramètres suivants. Pour tout ce qui n’est pas spécifié, conservez les paramètres par défaut.
+1. Vous devez créer un compte de stockage et une ressource Recherche Azure AI. Dans la liste déroulante de la ressource de stockage, sélectionnez **Créer une ressource de stockage Blob Azure**, puis créez un compte de stockage avec les paramètres suivants. Pour tout ce qui n’est pas spécifié, conservez les paramètres par défaut.
 
     - **Abonnement** : *même abonnement que votre ressource Azure OpenAI*
     - **Groupe de ressources** : *même groupe de ressources que votre ressource Azure OpenAI*
@@ -79,7 +79,7 @@ Ensuite, ajoutez vos données dans le terrain de jeu de conversation pour voir c
     - **Région** : *même région que votre ressource Azure OpenAI*
     - **Redondance** : stockage localement redondant (LRS)
 
-1. Une fois la ressource créée, revenez à Azure OpenAI Studio et sélectionnez **Créer une ressource Recherche cognitive Azure** avec les paramètres suivants. Pour tout ce qui n’est pas spécifié, conservez les paramètres par défaut.
+1. Une fois la ressource créée, revenez à Azure OpenAI Studio et sélectionnez **Créer une ressource Recherche Azure AI** avec les paramètres suivants. Pour tout ce qui n’est pas spécifié, conservez les paramètres par défaut.
 
     - **Abonnement** : *même abonnement que votre ressource Azure OpenAI*
     - **Groupe de ressources** : *même groupe de ressources que votre ressource Azure OpenAI*
@@ -93,10 +93,10 @@ Ensuite, ajoutez vos données dans le terrain de jeu de conversation pour voir c
     - **Sélectionner la source de données** : Charger des fichiers
     - **Sélectionner la ressource Stockage Blob Azure** : *choisissez la ressource de stockage que vous avez créée*
         - Activer CORS à l’invite
-    - **Sélectionner la ressource Recherche cognitive Azure** : *choisissez la ressource de recherche que vous avez créée*
+    - **Sélectionner la ressource Recherche Azure AI** : *choisissez la ressource de recherche que vous avez créée*
     - **Entrez le nom de l’index** : margiestravel
     - **Ajouter la recherche vectorielle à cette ressource de recherche** : décochée
-    - **Je reconnais que la connexion à un compte Recherche cognitive Azure entraîne l’utilisation de mon compte** : coché
+    - **Je reconnais que la connexion à un compte Recherche Azure AI entraîne l’utilisation de mon compte** : coché
 
 1. Dans la page **Charger des fichiers**, chargez les fichiers PDF téléchargés, puis sélectionnez **Suivant**.
 1. Dans la page **Gestion des données**, sélectionnez le type de recherche par **mot clé** dans la liste déroulante, puis **Suivant**.
