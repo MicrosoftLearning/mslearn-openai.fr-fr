@@ -1,98 +1,98 @@
 ---
 lab:
-    title: 'Generate images with a DALL-E model'
+  title: Générer des images avec un modèle DALL-E
 ---
 
-# Generate images with a DALL-E model
+# Générer des images avec un modèle DALL-E
 
-The Azure OpenAI Service includes an image-generation model named DALL-E. You can use this model to submit natural language prompts that describe a desired image, and the model will generate an original image based on the description you provide.
+Azure OpenAI Service comprend un modèle de génération d’images appelé DALL-E. Vous pouvez utiliser ce modèle pour envoyer des prompts en langage naturel qui décrivent une image que vous voulez, et le modèle génère une image originale basée sur la description que vous fournissez.
 
-In this exercise, you'll use a DALL-E version 3 model to generate images based on natural language prompts.
+Dans cet exercice, vous allez utiliser un modèle DALL-E version 3 pour générer des images basées sur des prompts en langage naturel.
 
-This exercise will take approximately **25** minutes.
+Cet exercice prend environ **25** minutes.
 
-## Provision an Azure OpenAI resource
+## Provisionner une ressource Azure OpenAI
 
-Before you can use Azure OpenAI to generate images, you must provision an Azure OpenAI resource in your Azure subscription. The resource must be in a region where DALL-E models are supported.
+Avant de pouvoir utiliser Azure OpenAI pour générer des images, vous devez approvisionner une ressource Azure OpenAI dans votre abonnement Azure. La ressource doit se trouver dans une région où les modèles DALL-E sont pris en charge.
 
-1. Sign into the **Azure portal** at `https://portal.azure.com`.
-2. Create an **Azure OpenAI** resource with the following settings:
-    - **Subscription**: *Select an Azure subscription that has been approved for access to the Azure OpenAI service, including DALL-E*
-    - **Resource group**: *Choose or create a resource group*
-    - **Region**: *Choose either **East US** or **Sweden Central***\*
-    - **Name**: *A unique name of your choice*
-    - **Pricing tier**: Standard S0
+1. Connectez-vous au **portail Azure** à l’adresse `https://portal.azure.com`.
+2. Créez une ressource **Azure OpenAI** avec les paramètres suivants :
+    - **Abonnement** : *Sélectionner un abonnement Azure qui a été approuvé pour pouvoir accéder à Azure OpenAI Service, y compris DALL-E*
+    - **Groupe de ressources** : *sélectionnez ou créez un groupe de ressources*.
+    - **Région** : *Choisir **USA Est** ou **Suède Centre***\*
+    - **Nom** : *un nom unique de votre choix*
+    - **Niveau tarifaire** : Standard S0
 
-    > \* DALL-E 3 models are only available in Azure OpenAI service resources in the **East US** and **Sweden Central** regions.
+    > \* Les modèles DALL-E 3 sont disponibles uniquement dans les ressources Azure OpenAI Service dans les régions **USA Est** et **Suède Centre**.
 
-3. Wait for deployment to complete. Then go to the deployed Azure OpenAI resource in the Azure portal.
+3. Attendez la fin du déploiement. Accédez ensuite à la ressource Azure OpenAI déployée dans le portail Azure.
 
-## Explore image-generation in the DALL-E playground
+## Explorer la génération d’images sur le terrain de jeu DALL-E
 
-You can use the DALL-E playground in **Azure OpenAI Studio** to experiment with image-generation.
+Vous pouvez utiliser le terrain de jeu DALL-E dans **Azure OpenAI Studio** pour expérimenter la génération d’images.
 
-1. In the Azure portal, on the **Overview** page for your Azure OpenAI resource, use the **Explore** button to open Azure OpenAI Studio in a new browser tab. Alternatively, navigate to [Azure OpenAI Studio](https://oai.azure.com) directly at `https://oai.azure.com`.
-2. In the **Playground** section, select the **DALL-E** playground. A deployment of the DALL-E model named *Dalle3* will be created automatically.
-3. In the **Prompt** box, enter a description of an image you'd like to generate. For example, `An elephant on a skateboard` Then select **Generate** and view the image that is generated.
+1. Dans le portail Azure, dans la page **Vue d’ensemble** de votre ressource Azure OpenAI, utilisez le bouton **Explorer** pour ouvrir Azure OpenAI Studio sous un nouvel onglet du navigateur. Vous pouvez aussi accéder à [Azure OpenAI Studio](https://oai.azure.com) directement sur `https://oai.azure.com`.
+2. Dans la section **Terrain de jeu**, sélectionnez le terrain de jeu **DALL-E**. Un déploiement du modèle DALL-E appelé *Dalle3* est créé automatiquement.
+3. Dans la zone **Prompt**, entrez une description d’une image que vous souhaitez générer. Par exemple, `An elephant on a skateboard`, puis sélectionnez **Générer** et visualisez l’image générée.
 
-    ![The DALL-E Playground in Azure OpenAI Studio with a generated image.](../media/dall-e-playground.png)
+    ![Terrain de jeu DALL-E dans Azure OpenAI Studio avec une image générée.](../media/dall-e-playground.png)
 
-4. Modify the prompt to provide a more specific description. For example `An elephant on a skateboard in the style of Picasso`. Then generate the new image and review the results.
+4. Modifiez le prompt pour fournir une description plus spécifique. Par exemple, `An elephant on a skateboard in the style of Picasso`. Ensuite, générez la nouvelle image et regardez les résultats.
 
-    ![The DALL-E Playground in Azure OpenAI Studio with two generated images.](../media/dall-e-playground-new-image.png)
+    ![Terrain de jeu DALL-E dans Azure OpenAI Studio avec deux images générées.](../media/dall-e-playground-new-image.png)
 
-## Use the REST API to generate images
+## Utiliser l’API REST pour générer des images
 
-The Azure OpenAI service provides a REST API that you can use to submit prompts for content generation - including images generated by a DALL-E model.
+Azure OpenAI Service fournit une API REST que vous pouvez utiliser pour envoyer des prompts de génération de contenu, y compris les images générées par un modèle DALL-E.
 
-### Prepare to develop an app in Visual Studio Code
+### Préparer le développement d’une application dans Visual Studio Code
 
-Now let's explore how you could build a custom app that uses Azure OpenAI service to generate images. You'll develop your app using Visual Studio Code. The code files for your app have been provided in a GitHub repo.
+Découvrons maintenant comment vous pourriez créer une application personnalisée qui utilise Azure OpenAI Service pour générer des images. Vous allez développer votre application à l’aide de Visual Studio Code. Les fichiers de code de votre application ont été fournis dans un référentiel GitHub.
 
-> **Tip**: If you have already cloned the **mslearn-openai** repo, open it in Visual Studio code. Otherwise, follow these steps to clone it to your development environment.
+> **Conseil** : Si vous avez déjà cloné le dépôt **mslearn-openai**, ouvrez-le dans Visual Studio Code. Dans le cas contraire, procédez comme suit pour le cloner dans votre environnement de développement.
 
-1. Start Visual Studio Code.
-2. Open the palette (SHIFT+CTRL+P) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/mslearn-openai` repository to a local folder (it doesn't matter which folder).
-3. When the repository has been cloned, open the folder in Visual Studio Code.
+1. Démarrez Visual Studio Code.
+2. Ouvrez la palette (Maj+CTRL+P) et exécutez une commande **Git : Cloner** pour cloner le référentiel `https://github.com/MicrosoftLearning/mslearn-openai` vers un dossier local (peu importe quel dossier).
+3. Lorsque le référentiel a été cloné, ouvrez le dossier dans Visual Studio Code.
 
-    > **Note**: If Visual Studio Code shows you a pop-up message to prompt you to trust the code you are opening, click on **Yes, I trust the authors** option in the pop-up.
+    > **Remarque** : Si Visual Studio Code affiche un message contextuel qui vous invite à approuver le code que vous ouvrez, cliquez sur l’option **Oui, je fais confiance aux auteurs** dans la fenêtre contextuelle.
 
-4. Wait while additional files are installed to support the C# code projects in the repo.
+4. Attendez que des fichiers supplémentaires soient installés pour prendre en charge les projets de code C# dans le référentiel.
 
-    > **Note**: If you are prompted to add required assets to build and debug, select **Not Now**.
+    > **Remarque** : si vous êtes invité à ajouter des ressources requises pour générer et déboguer, sélectionnez **Not Now** (Pas maintenant).
 
-### Configure your application
+### Configuration de votre application
 
-Applications for both C# and Python have been provided. Both apps feature the same functionality. First, you'll add the endpoint and key for your Azure OpenAI resource to the app's configuration file.
+Des applications pour C# et Python sont fournies. Les deux applications présentent les mêmes fonctionnalités. Tout d’abord, vous allez ajouter le point de terminaison et la clé de votre ressource Azure OpenAI au fichier de configuration de l’application.
 
-1. In Visual Studio Code, in the **Explorer** pane, browse to the **Labfiles/05-image-generation** folder and expand the **CSharp** or **Python** folder depending on your language preference. Each folder contains the language-specific files for an app into which you're you're going to integrate Azure OpenAI functionality.
-2. In the **Explorer** pane, in the **CSharp** or **Python** folder, open the configuration file for your preferred language
+1. Dans Visual Studio Code, dans le volet **Explorateur**, accédez au dossier **Labfiles/05-image-generation**, puis développez le dossier **CSharp** ou **Python**, selon le langage que vous préférez. Chaque dossier contient les fichiers propres au langage d’une application dans laquelle vous allez intégrer des fonctionnalités Azure OpenAI.
+2. Dans le volet **Explorateur**, dans le dossier **CSharp** ou **Python**, ouvrez le fichier de configuration du langage de votre choix
 
-    - **C#**: appsettings.json
-    - **Python**: .env
+    - **C#** : appsettings.json
+    - **Python** : .env
     
-3. Update the configuration values to include the **endpoint** and **key** from the Azure OpenAI resource you created (available on the **Keys and Endpoint** page for your Azure OpenAI resource in the Azure portal).
-4. Save the configuration file.
+3. Mettez à jour les valeurs de configuration pour inclure le **point de terminaison** et la **clé** de la ressource Azure OpenAI que vous avez créée (disponible dans la page **Clés et point de terminaison** de votre ressource Azure OpenAI dans le portail Azure).
+4. Enregistrez le fichier de configuration.
 
-### View application code
+### Voir le code d’application
 
-Now you're ready to explore the code used to call the REST API and generate an image.
+Vous êtes maintenant prêt à explorer le code utilisé pour appeler l’API REST et générer une image.
 
-1. In the **Explorer** pane, select the main code file for your application:
+1. Dans le volet **Explorateur**, sélectionnez le fichier de code principal de votre application :
 
     - C#: `Program.cs`
-    - Python: `generate-image.py`
+    - Python : `generate-image.py`
 
-2. Review the code that the file contains, noting the following key features:
-    - The code makes an https request to the endpoint for your service, including the key for your service in the header. Both of these values are obtained from the configuration file.
-    - The request includes some parameters, including the prompt from on the image should be based, the number of images to generate, and the size of the generated image(s).
-    - The response includes a revised prompt that the DALL-E model extrapolated from the user-provided prompt to make it more descriptive, and the URL for the generated image.
+2. Passez en revue le code que contient le fichier, en notant les fonctionnalités clés suivantes :
+    - Le code envoie une requête https au point de terminaison de votre service, y compris la clé de votre service dans l’en-tête. Ces deux valeurs sont obtenues dans le fichier de configuration.
+    - La requête contient certains paramètres, notamment le prompt sur lequel doit être basée l’image, le nombre d’images à générer et la taille de la ou des images générées.
+    - La réponse contient un prompt révisé que le modèle DALL-E a extrapolé du prompt fourni par l’utilisateur pour le rendre plus descriptif, ainsi que l’URL de l’image générée.
 
-### Run the app
+### Exécuter l’application
 
-Now that you've reviewed the code, it's time to run it and generate some images.
+Maintenant que vous avez revu le code, il est temps de l’exécuter et de générer des images.
 
-1. Right-click the **CSharp** or **Python** folder containing your code files and open an integrated terminal. Then enter the appropriate command to run your application:
+1. Cliquez avec le bouton droit sur le dossier **CSharp** ou **Python** contenant vos fichiers de code, puis ouvrez un terminal intégré. Entrez ensuite la commande appropriée pour exécuter votre application :
 
    **C#**
    ```
@@ -105,14 +105,14 @@ Now that you've reviewed the code, it's time to run it and generate some images.
    python generate-image.py
    ```
 
-3. When prompted, enter a description for an image. For example, *A giraffe flying a kite*.
+3. Lorsque vous y êtes invité, entrez une description pour une image. Par exemple, *Une girafe faisant voler un cerf-volant*.
 
-4. Wait for the image to be generated - a hyperlink will be displayed in the terminal pane. Then select the hyperlink to open a new browser tab and review the image that was generated.
+4. Attendez que l’image soit générée. Un lien hypertexte s’affiche dans le volet du terminal. Sélectionnez ensuite le lien hypertexte pour ouvrir un nouvel onglet de navigateur et regarder l’image qui a été générée.
 
-   > **TIP**: If the app doesn't return a response, wait a minute and try again. Newly deployed resources can take up to 5 minutes to become available.
+   > **CONSEIL** : Si l’application ne retourne pas de réponse, attendez une minute et réessayez. Les ressources nouvellement déployées peuvent prendre jusqu’à 5 minutes avant d’être disponibles.
 
-5. Close the browser tab containing the generated image and re-run the app to generate a new image with a different prompt.
+5. Fermez l’onglet du navigateur contenant l’image générée et réexécutez l’application pour générer une nouvelle image avec un autre prompt.
 
-## Clean up
+## Nettoyage
 
-When you're done with your Azure OpenAI resource, remember to delete the resource in the **Azure portal** at `https://portal.azure.com`.
+Lorsque vous avez terminé avec votre ressource Azure OpenAI, n’oubliez pas de la supprimer dans le **portail Azure** sur `https://portal.azure.com`.
