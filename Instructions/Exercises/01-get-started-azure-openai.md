@@ -13,11 +13,11 @@ Cet exercice prend environ **30** minutes.
 
 ## Provisionner une ressource Azure OpenAI
 
-Si vous n’avez pas encore de ressource Azure OpenAI dans votre abonnement Azure, provisionnez-en une.
+Si vous n’en avez pas déjà une, approvisionnez une ressource Azure OpenAI dans votre abonnement Azure.
 
 1. Connectez-vous au **portail Azure** à l’adresse `https://portal.azure.com`.
 2. Créez une ressource **Azure OpenAI** avec les paramètres suivants :
-    - **Abonnement** : *Sélectionner un abonnement Azure approuvé pour l’accès au service Azure OpenAI*
+    - **Abonnement** : *Sélectionner un abonnement Azure approuvé pour l’accès à Azure OpenAI Service*
     - **Groupe de ressources** : *sélectionnez ou créez un groupe de ressources*.
     - **Région** : *Choisir de manière **aléatoire** une région parmi les suivantes*\*
         - Australie Est
@@ -67,7 +67,7 @@ Maintenant que vous avez déployé un modèle, vous pouvez l’utiliser pour gé
 
 1. Dans la section **Terrain de jeu**, sélectionnez la page **Conversation**. La page du terrain de jeu **Conversation** se compose de trois panneaux principaux (qui peuvent être disposés horizontalement de droite à gauche ou verticalement de haut en bas en fonction de la résolution de l’écran) :
     - **Configuration** : utilisée pour définir le contexte des réponses du modèle.
-    - **Session de conversation** : utilisée pour envoyer des messages de conversation et afficher les réponses.
+    - **Session de conversation** : utilisée pour envoyer des messages de conversation et voir les réponses.
     - **Configuration** : utilisée pour configurer les paramètres du modèle de déploiement.
 1. Dans le panneau **Configuration**, vérifiez que votre modèle de déploiement gpt-35-turbo-16k est sélectionné.
 1. Dans le panneau **Configuration**, passez en revue le** message système** par défaut, qui doit être *Vous êtes un assistant IA qui aide les personnes à trouver des informations.* Le message système est inclus dans les invites envoyées au modèle et fournit un contexte pour les réponses du modèle ; définition des attentes quant à la façon dont un agent d’IA basé sur le modèle doit interagir avec l’utilisateur.
@@ -101,13 +101,13 @@ Jusqu’à présent, vous avez engagé une conversation instantanée avec votre 
 
     **Utilisateur** :
     
-    ```
+    ```prompt
     Write an advertisement for the lightweight "Ultramop" mop, which uses patented absorbent materials to clean floors.
     ```
     
     **Assistant :**
     
-    ```
+    ```prompt
     Welcome to the future of cleaning!
     
     The Ultramop makes light work of even the dirtiest of floors. Thanks to its patented absorbent materials, it ensures a brilliant shine. Just look at these features:
@@ -155,7 +155,7 @@ Maintenant que vous avez exploré certaines des fonctionnalités d’un modèle 
 1. Une fois que votre application web a été déployée avec succès, utilisez le bouton en haut à droite de la page du terrain de jeu **Conversation** pour lancer l’application web. Le lancement de l’application peut prendre plusieurs minutes. Si vous y êtes invité, acceptez la demande d’autorisations.
 1. Dans l’application web, entrez le message de conversation suivant :
 
-    ```
+    ```prompt
     Write an advertisement for the new "WonderWipe" cloth that attracts dust particulates and can be used to clean any household surface.
     ```
 
