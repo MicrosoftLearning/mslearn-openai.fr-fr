@@ -113,6 +113,7 @@ Vous allez maintenant ajouter des données pour une agence de voyage fictive app
 
 1. Dans la page **Charger des fichiers**, chargez les fichiers PDF téléchargés, puis sélectionnez **Suivant**.
 1. Dans la page **Gestion des données**, sélectionnez le type de recherche par **mot clé** dans la liste déroulante, puis **Suivant**.
+1. Dans la page **Connexion de données**, sélectionnez **Clé API**.
 1. Dans la page **Vérifier, puis terminer**, sélectionnez **Enregistrer et fermer** pour ajouter vos données. Cette opération peut prendre quelques minutes, pendant lesquelles vous devez laisser votre fenêtre ouverte. Une fois l’opération terminée, vous verrez la source de données, la ressource de recherche et l’index spécifiés dans la section **Définition**.
 
     > **Conseil** : Parfois, la connexion entre votre nouvel index de recherche et Azure OpenAI Studio prend trop de temps. Si vous avez attendu quelques minutes et qu’il n’a toujours pas été connecté, vérifiez vos ressources Recherche IA dans le portail Azure. Si vous voyez l’index terminé, vous pouvez déconnecter la connexion de données dans Azure OpenAI Studio et l’ajouter à nouveau en spécifiant une source de données Recherche Azure AI et en sélectionnant votre nouvel index.
