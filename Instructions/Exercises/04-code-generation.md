@@ -13,11 +13,11 @@ Cet exercice prend environ **25** minutes.
 
 ## Provisionner une ressource Azure OpenAI
 
-Si vous n’en disposez pas encore, approvisionnez une ressource Azure OpenAI dans votre abonnement Azure.
+Si vous n’en avez pas déjà une, approvisionnez une ressource Azure OpenAI dans votre abonnement Azure.
 
 1. Connectez-vous au **portail Azure** à l’adresse `https://portal.azure.com`.
 2. Créez une ressource **Azure OpenAI** avec les paramètres suivants :
-    - **Abonnement** : *Sélectionnez un abonnement Azure approuvé pour l’accès au service Azure OpenAI*
+    - **Abonnement** : *Sélectionner un abonnement Azure approuvé pour l’accès à Azure OpenAI Service*
     - **Groupe de ressources** : *sélectionnez ou créez un groupe de ressources*.
     - **Région** : *Choisir de manière **aléatoire** une région parmi les suivantes*\*
         - Australie Est
@@ -43,14 +43,13 @@ Azure OpenAI fournit un portail web appelé **Azure OpenAI Studio**, que vous po
 
 1. Sur la page **Vue d’ensemble** de votre ressource Azure OpenAI, utilisez le bouton **Accéder à Azure OpenAI Studio** pour ouvrir Azure OpenAI Studio sous un nouvel onglet du navigateur.
 2. Dans Azure OpenAI Studio, sur la page **Déploiements**, affichez vos déploiements de modèles existants. Si vous n’en avez pas encore, créez un déploiement du modèle **gpt-35-turbo-16k** avec les paramètres suivants :
+    - **Nom du déploiement** : *nom unique de votre choix*
     - **Modèle** : gpt-35-turbo-16k *(si le modèle 16k n’est pas disponible, choisissez gpt-35-turbo)*
     - **Version du modèle** : mise à jour automatique avec la valeur par défaut
-    - **Nom du déploiement** : *Un nom unique de votre choix. Vous allez utiliser ce nom plus tard dans le labo.*
-    - **Options avancées**
-        - **Filtre de contenu** : valeur par défaut
-        - **Type de déploiement** : Standard
-        - **Limite de débit de jetons par minute** : 5 000\*
-        - **Activer le quota dynamique** :activé
+    - **Type de déploiement** : Standard
+    - **Limite de débit de jetons par minute** : 5 000\*
+    - **Filtre de contenu** : valeur par défaut
+    - **Activer le quota dynamique** :activé
 
     > \* Une limite de débit de 5 000 jetons par minute est plus que suffisante pour effectuer cet exercice tout permettant à d’autres personnes d’utiliser le même abonnement.
 
@@ -59,8 +58,8 @@ Azure OpenAI fournit un portail web appelé **Azure OpenAI Studio**, que vous po
 Avant de l’utiliser dans votre application, examinez comment Azure OpenAI peut générer et expliquer du code dans le terrain de jeu de conversation.
 
 1. Dans **Azure OpenAI Studio** à l’adresse `https://oai.azure.com`, dans la section **Playground**, sélectionnez la page **Conversation**. La page du terrain de jeu **Conversation** se compose de trois sections principales :
-    - **Configuration** : utilisée pour définir le contexte pour les réponses du modèle.
-    - **Session de conversation** : utilisée pour soumettre des messages de conversation et afficher les réponses.
+    - **Définition** : utilisée pour définir le contexte pour les réponses du modèle.
+    - **Session de conversation** : utilisée pour envoyer des messages de conversation et voir les réponses.
     - **Configuration** : utilisée pour configurer les paramètres du modèle de déploiement.
 2. Dans la section **Configuration**, vérifiez que votre modèle de déploiement est sélectionné.
 3. Dans la zone **Configuration**, définissez le message système sur `You are a programming assistant helping write code` et appliquez les modifications.
@@ -116,13 +115,13 @@ Avant de l’utiliser dans votre application, examinez comment Azure OpenAI peut
 
 Examinons maintenant comment créer une application personnalisée qui utilise le service Azure OpenAI pour générer du code. Vous allez développer votre application à l’aide de Visual Studio Code. Les fichiers de code de votre application ont été fournis dans un référentiel GitHub.
 
-> **Conseil** : Si vous avez déjà cloné le référentiel **mslearn-openai**, ouvrez-le dans Visual Studio Code. Dans le cas contraire, procédez comme suit pour le cloner dans votre environnement de développement.
+> **Conseil** : Si vous avez déjà cloné le dépôt **mslearn-openai**, ouvrez-le dans Visual Studio Code. Dans le cas contraire, procédez comme suit pour le cloner dans votre environnement de développement.
 
 1. Démarrez Visual Studio Code.
 2. Ouvrez la palette (Maj+CTRL+P) et exécutez une commande **Git : Cloner** pour cloner le référentiel `https://github.com/MicrosoftLearning/mslearn-openai` vers un dossier local (peu importe quel dossier).
 3. Lorsque le référentiel a été cloné, ouvrez le dossier dans Visual Studio Code.
 
-    > **Remarque** : Si Visual Studio Code affiche un message contextuel pour vous inviter à approuver le code que vous ouvrez, cliquez sur l’option **Oui, je fais confiance aux auteurs** dans la fenêtre contextuelle.
+    > **Remarque** : Si Visual Studio Code affiche un message contextuel qui vous invite à approuver le code que vous ouvrez, cliquez sur l’option **Oui, je fais confiance aux auteurs** dans la fenêtre contextuelle.
 
 4. Attendez que des fichiers supplémentaires soient installés pour prendre en charge les projets de code C# dans le référentiel.
 
@@ -133,7 +132,7 @@ Examinons maintenant comment créer une application personnalisée qui utilise l
 Des applications pour C# et Python sont fournies, ainsi qu’un exemple de fichier texte que vous utiliserez pour tester le résumé. Les deux applications présentent les mêmes fonctionnalités. Tout d’abord, vous allez compléter certaines parties clés de l’application pour activer l’utilisation de votre ressource Azure OpenAI.
 
 1. Dans Visual Studio Code, dans le volet **Explorateur**, accédez au dossier **Labfiles/04-code-generation**, puis développez le dossier **CSharp** ou **Python**, selon le langage que vous préférez. Chaque dossier contient les fichiers propres au langage d’une application dans laquelle vous allez intégrer des fonctionnalités Azure OpenAI.
-2. Cliquez avec le bouton droit sur le dossier **CSharp** ou **Python** contenant vos fichiers de code, puis ouvrez un terminal intégré. Installez ensuite le package du Kit de développement logiciel (SDK) Azure OpenAI en exécutant la commande appropriée pour le langage de votre choix :
+2. Cliquez avec le bouton droit sur le dossier **CSharp** ou **Python** contenant vos fichiers de code, puis ouvrez un terminal intégré. Installez ensuite le package du SDK Azure OpenAI en exécutant la commande appropriée pour le langage de votre choix :
 
     **C# :**
 
@@ -147,7 +146,7 @@ Des applications pour C# et Python sont fournies, ainsi qu’un exemple de fichi
     pip install openai==1.13.3
     ```
 
-3. Dans le volet **Explorateur**, dans le dossier **CSharp** ou **Python**, ouvrez le fichier de configuration pour le langage de votre choix.
+3. Dans le volet **Explorateur**, dans le dossier **CSharp** ou **Python**, ouvrez le fichier de configuration pour le langage de votre choix
 
     - **C#** : appsettings.json
     - **Python** : .env
@@ -255,4 +254,4 @@ Maintenant que votre application est configurée, exécutez-la pour essayer de g
 
 ## Nettoyage
 
-Quand vous en avez terminé avec votre ressource Azure OpenAI, n’oubliez pas de supprimer le déploiement ou la ressource entière dans le **portail Azure** à l’adresse `https://portal.azure.com`.
+Lorsque vous avez terminé avec votre ressource Azure OpenAI, n’oubliez pas de supprimer le déploiement ou la ressource entière dans le **Portail Azure** à `https://portal.azure.com`.
