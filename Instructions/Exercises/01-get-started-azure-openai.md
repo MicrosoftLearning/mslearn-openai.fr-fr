@@ -48,14 +48,13 @@ Le service Azure OpenAI fournit un portail web appelé **Azure OpenAI Studio**, 
     Une fois le nouvel onglet ouvert, vous pouvez fermer toutes les notifications de bannière pour les nouveaux services en préversion qui s’affichent en haut de la page Azure OpenAI Studio.
 
 1. Dans Azure OpenAI Studio, dans le panneau de gauche, sélectionnez la page **Déploiements** et affichez vos modèles de déploiement existants. Si vous n’en avez pas encore, créez un déploiement du modèle **gpt-35-turbo-16k** avec les paramètres suivants :
+    - **Nom du déploiement** : *nom unique de votre choix*
     - **Modèle** : gpt-35-turbo-16k *(si le modèle 16k n’est pas disponible, choisissez gpt-35-turbo)*
     - **Version du modèle** : mise à jour automatique avec la valeur par défaut
-    - **Nom du déploiement** : *nom unique de votre choix*
-    - **Options avancées**
-        - **Filtre de contenu** : valeur par défaut
-        - **Type de déploiement** : Standard
-        - **Limite de débit de jetons par minute** : 5 000\*
-        - **Activer le quota dynamique** :activé
+    - **Type de déploiement** : Standard
+    - **Limite de débit de jetons par minute** : 5 000\*
+    - **Filtre de contenu** : valeur par défaut
+    - **Activer le quota dynamique** :activé
 
     > \* Une limite de débit de 5 000 jetons par minute est plus que suffisante pour effectuer cet exercice tout permettant à d’autres personnes d’utiliser le même abonnement.
 
