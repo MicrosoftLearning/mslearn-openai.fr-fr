@@ -5,7 +5,7 @@ lab:
 
 # Démarrage de Azure OpenAI Service
 
-Azure OpenAI Service intègre les modèles d’IA générative développés par OpenAI à la plateforme Azure, ce qui vous permet de développer de puissantes solutions d’IA qui bénéficient de la sécurité, de la scalabilité et de l’intégration de services fournies par la plateforme cloud Azure. Dans cet exercice, vous allez apprendre à utiliser Azure OpenAI en provisionnant le service en tant que ressource Azure et en utilisant Azure OpenAI Studio pour déployer et explorer des modèles d’IA générative.
+Azure OpenAI Service intègre les modèles d’IA générative développés par OpenAI à la plateforme Azure, ce qui vous permet de développer de puissantes solutions d’IA qui bénéficient de la sécurité, de la scalabilité et de l’intégration de services fournies par la plateforme cloud Azure. Dans cet exercice, vous allez apprendre à utiliser Azure OpenAI en approvisionnant le service en tant que ressource Azure et en utilisant Azure AI Studio pour déployer et explorer des modèles d’IA générative.
 
 Dans le scénario de cet exercice, vous allez jouer le rôle d’un développeur de logiciels qui a été chargé d’implémenter un agent d’IA capable d’utiliser l’IA générative pour aider une organisation marketing à améliorer son efficacité pour atteindre les clients et lancer la publicité de nouveaux produits. Les techniques utilisées dans l’exercice peuvent être appliquées à n’importe quel scénario dans lequel une organisation souhaite utiliser des modèles d’IA générative pour aider les employés à être plus efficaces et productifs.
 
@@ -39,37 +39,33 @@ Si vous n’en avez pas déjà une, approvisionnez une ressource Azure OpenAI da
 
 ## Déployer un modèle
 
-Le service Azure OpenAI fournit un portail web appelé **Azure OpenAI Studio**, que vous pouvez utiliser pour déployer, gérer et explorer des modèles. Vous allez commencer votre exploration d’Azure OpenAI en utilisant Azure OpenAI Studio pour déployer un modèle.
+Azure fournit un portail web appelé **Azure AI Studio**, que vous pouvez utiliser pour déployer, gérer et explorer des modèles. Vous allez commencer votre exploration d’Azure OpenAI en utilisant Azure AI Studio pour déployer un modèle.
 
-> **Remarque** : Lorsque vous utilisez Azure OpenAI Studio, des boîtes de message qui suggèrent des tâches à effectuer peuvent être affichées. Vous pouvez les fermer et suivre les étapes de cet exercice.
+> **Remarque** : lorsque vous utilisez Azure AI Studio, des boîtes de message qui suggèrent des tâches à effectuer peuvent être affichées. Vous pouvez les fermer et suivre les étapes de cet exercice.
 
-1. Dans le portail Azure, sur la page **Vue d’ensemble** de votre ressource Azure OpenAI, utilisez le bouton **Accéder à Azure OpenAI Studio** pour ouvrir Azure OpenAI Studio sous un nouvel onglet du navigateur.
-
-    Une fois le nouvel onglet ouvert, vous pouvez fermer toutes les notifications de bannière pour les nouveaux services en préversion qui s’affichent en haut de la page Azure OpenAI Studio.
-
-1. Dans Azure OpenAI Studio, dans le panneau de gauche, sélectionnez la page **Déploiements** et affichez vos modèles de déploiement existants. Si vous n’en avez pas encore, créez un déploiement du modèle **gpt-35-turbo-16k** avec les paramètres suivants :
+1. Dans le portail Azure, sur la page **Vue d’ensemble** de votre ressource Azure OpenAI, faites défiler jusqu’à la section **Démarrer** et sélectionnez le bouton permettant d’accéder à **AI Studio**.
+1. Dans Azure AI Studio, dans le panneau de gauche, sélectionnez la page **Déploiements** et affichez vos modèles de déploiement existants. Si vous n’en avez pas encore, créez un déploiement du modèle **gpt-35-turbo-16k** avec les paramètres suivants :
     - **Nom du déploiement** : *nom unique de votre choix*
     - **Modèle** : gpt-35-turbo-16k *(si le modèle 16k n’est pas disponible, choisissez gpt-35-turbo)*
-    - **Version du modèle** : mise à jour automatique avec la valeur par défaut
+    - **Version du modèle** : *utiliser la version par défaut*
     - **Type de déploiement** : Standard
     - **Limite de débit de jetons par minute** : 5 000\*
     - **Filtre de contenu** : valeur par défaut
-    - **Activer le quota dynamique** :activé
+    - **Activer le quota dynamique** : désactivé
 
     > \* Une limite de débit de 5 000 jetons par minute est plus que suffisante pour effectuer cet exercice tout permettant à d’autres personnes d’utiliser le même abonnement.
 
 ## Utiliser le terrain de jeu Conversation
 
-Maintenant que vous avez déployé un modèle, vous pouvez l’utiliser pour générer des réponses basées sur des invites en langage naturel. Le terrain de jeu *Conversation* dans Azure OpenAI Studio fournit une interface de chatbot pour les modèles GPT 3.5 et ultérieurs.
+Maintenant que vous avez déployé un modèle, vous pouvez l’utiliser pour générer des réponses basées sur des invites en langage naturel. Le terrain de jeu *Conversation* dans Azure AI Studio fournit une interface de chatbot pour les modèles GPT 3.5 et ultérieurs.
 
 > **Remarque :** Le terrain de jeu *Conversation* utilise l’API *ChatCompletions* plutôt que l’ancienne API *Completions* utilisée par le terrain de jeu d’*achèvements*. Le terrain de jeu d’achèvements est fourni pour la compatibilité avec les modèles plus anciens.
 
-1. Dans la section **Terrain de jeu**, sélectionnez la page **Conversation**. La page du terrain de jeu **Conversation** se compose de trois panneaux principaux (qui peuvent être disposés horizontalement de droite à gauche ou verticalement de haut en bas en fonction de la résolution de l’écran) :
-    - **Configuration** : utilisée pour définir le contexte des réponses du modèle.
+1. Dans la section **Terrain de jeu**, sélectionnez la page **Conversation**. La page du terrain de jeu **Conversation** se compose d’une rangée de boutons et de deux panneaux principaux (qui peuvent être disposés horizontalement de droite à gauche ou verticalement de haut en bas en fonction de la résolution de l’écran) :
+    - **Configuration** : utilisée pour sélectionner votre déploiement, définir le message système et définir des paramètres pour interagir avec votre déploiement.
     - **Session de conversation** : utilisée pour envoyer des messages de conversation et voir les réponses.
-    - **Configuration** : utilisée pour configurer les paramètres du modèle de déploiement.
-1. Dans le panneau **Configuration**, vérifiez que votre modèle de déploiement gpt-35-turbo-16k est sélectionné.
-1. Dans le panneau **Configuration**, passez en revue le** message système** par défaut, qui doit être *Vous êtes un assistant IA qui aide les personnes à trouver des informations.* Le message système est inclus dans les invites envoyées au modèle et fournit un contexte pour les réponses du modèle ; définition des attentes quant à la façon dont un agent d’IA basé sur le modèle doit interagir avec l’utilisateur.
+1. Sous **Déploiements**, vérifiez que votre déploiement de modèle gpt-35-turbo-16k est sélectionné.
+1. Passez en revue le **message système** par défaut, qui doit être *Vous êtes un assistant IA qui aide les personnes à trouver des informations.* Le message système est inclus dans les invites envoyées au modèle et fournit un contexte pour les réponses du modèle ; définition des attentes quant à la façon dont un agent d’IA basé sur le modèle doit interagir avec l’utilisateur.
 1. Dans le panneau de **session de conversation**, entrez la requête utilisateur `How can I use generative AI to help me market a new product?`.
 
     > **Remarque** : Vous pouvez recevoir une réponse indiquant que le déploiement de l’API n’est pas encore prêt. Si tel est le cas, patientez quelques minutes et réessayez.
@@ -84,7 +80,7 @@ Maintenant que vous avez déployé un modèle, vous pouvez l’utiliser pour gé
 
 Jusqu’à présent, vous avez engagé une conversation instantanée avec votre modèle basée sur le message système par défaut. Vous pouvez personnaliser la configuration du système pour avoir plus de contrôle sur les types de réponses générés par votre modèle.
 
-1. Dans le panneau **Configuration**, sous **Utiliser un modèle de message système**, sélectionnez le modèle **Assistant d’écriture marketing** et confirmez que vous souhaitez mettre à jour le message système.
+1. Dans la barre d’outils principale, sélectionnez les **exemples d’invites** et utilisez le modèle d’invite **Assistant de rédaction marketing**.
 1. Passez en revue le nouveau message système, qui décrit comment un agent d’IA doit utiliser le modèle pour répondre.
 1. Dans le panneau de la **session de conversation**, entrez la requête utilisateur `Create an advertisement for a new scrubbing brush`.
 1. Passez en revue la réponse, qui doit inclure une copie publicitaire pour une brosse de nettoyage. La copie peut être assez étendue et créative.
@@ -96,7 +92,7 @@ Jusqu’à présent, vous avez engagé une conversation instantanée avec votre 
 
     La réponse doit maintenant être plus utile, mais pour avoir encore plus de contrôle sur le résultat du modèle, vous pouvez fournir un ou plusieurs exemples *à quelques captures* sur lesquels les réponses doivent être basées.
 
-1. Dans le panneau **Configuration**, sous **Exemples**, sélectionnez **Ajouter**. Tapez ensuite le message et la réponse suivants dans les zones désignées :
+1. Sous la zone de texte **Message système**, développez la liste déroulante **Ajouter une section** et sélectionnez **Exemples**. Tapez ensuite le message et la réponse suivants dans les zones désignées :
 
     **Utilisateur** :
     
@@ -139,7 +135,7 @@ Vous avez exploré la façon dont le message système, les exemples et les invit
 
 ## Déployer votre modèle sur une application web
 
-Maintenant que vous avez exploré certaines des fonctionnalités d’un modèle d’IA générative dans le terrain de jeu Azure OpenAI Studio, vous pouvez déployer une application web Azure pour fournir une interface d’agent d’IA de base par le biais de laquelle les utilisateurs peuvent discuter avec le modèle.
+Maintenant que vous avez exploré certaines des fonctionnalités d’un modèle d’IA générative dans le terrain de jeu Azure AI Studio, vous pouvez déployer une application web Azure pour fournir une interface d’agent d’IA de base par le biais de laquelle les utilisateurs peuvent discuter avec le modèle.
 
 1. En haut à droite de la page du terrain de jeu de **conversation**, dans le menu **Déployer sur**, sélectionnez **Une nouvelle application web**.
 1. Dans la boîte de dialogue **Déployer sur une application web**, créez une application web avec les paramètres suivants :
@@ -162,7 +158,7 @@ Maintenant que vous avez exploré certaines des fonctionnalités d’un modèle 
 
     > **Remarque** : Vous avez déployé le *modèle* sur une application web, mais ce déploiement n’inclut pas les paramètres système que vous avez définis dans le terrain de jeu. Par conséquent, la réponse peut ne pas refléter les exemples que vous avez spécifiés dans le terrain de jeu. Dans un scénario réel, vous devez ajouter une logique à votre application pour modifier l’invite afin qu’elle inclue les données contextuelles appropriées pour les types de réponse que vous souhaitez générer. Ce type de personnalisation dépasse le cadre de cet exercice d’introduction, mais vous pouvez en savoir plus sur les techniques d’ingénierie rapides et les API Azure OpenAI dans d’autres exercices et documentations produits.
 
-1. Une fois que vous avez terminé d’expérimenter votre modèle dans l’application web, fermez l’onglet de l’application web dans votre navigateur pour revenir à Azure OpenAI Studio.
+1. Une fois que vous avez terminé d’expérimenter votre modèle dans l’application web, fermez l’onglet de l’application web dans votre navigateur pour revenir à Azure AI Studio.
 
 ## Nettoyage
 

@@ -16,7 +16,7 @@ Cet exercice prend environ **25** minutes.
 Avant de pouvoir utiliser Azure OpenAI pour générer des images, vous devez approvisionner une ressource Azure OpenAI dans votre abonnement Azure. La ressource doit se trouver dans une région où les modèles DALL-E sont pris en charge.
 
 1. Connectez-vous au **portail Azure** à l’adresse `https://portal.azure.com`.
-2. Créez une ressource **Azure OpenAI** avec les paramètres suivants :
+1. Créez une ressource **Azure OpenAI** avec les paramètres suivants :
     - **Abonnement** : *Sélectionner un abonnement Azure qui a été approuvé pour pouvoir accéder à Azure OpenAI Service, y compris DALL-E*
     - **Groupe de ressources** : *sélectionnez ou créez un groupe de ressources*.
     - **Région** : *Choisir **USA Est** ou **Suède Centre***\*
@@ -25,21 +25,29 @@ Avant de pouvoir utiliser Azure OpenAI pour générer des images, vous devez app
 
     > \* Les modèles DALL-E 3 sont disponibles uniquement dans les ressources Azure OpenAI Service dans les régions **USA Est** et **Suède Centre**.
 
-3. Attendez la fin du déploiement. Accédez ensuite à la ressource Azure OpenAI déployée dans le portail Azure.
+1. Attendez la fin du déploiement. Accédez ensuite à la ressource Azure OpenAI déployée dans le portail Azure.
+1. Sur la page **Vue d’ensemble** de votre ressource Azure OpenAI, faites défiler jusqu’à la section **Démarrer** et sélectionnez le bouton permettant d’accéder à **AI Studio**.
+1. Dans Azure AI Studio, dans le panneau de gauche, sélectionnez la page **Déploiements** et affichez vos modèles de déploiement existants. Si vous n’en avez pas encore pour DALL-E 3, créez un déploiement du modèle **dall-e-3** avec les paramètres suivants :
+    - **Nom du déploiement** : dalle3
+    - **Version du modèle** : *utiliser la version par défaut*
+    - **Type de déploiement** : Standard
+    - **Unités de capacité** : 1K
+    - **Filtre de contenu** : valeur par défaut
+    - **Activer le quota dynamique** : désactivé
+1. Une fois le déploiement effectué, revenez à la page **Images** dans le volet gauche.
 
-## Explorer la génération d’images sur le terrain de jeu DALL-E
+## Explorer la génération d’images sur le terrain de jeu Images
 
-Vous pouvez utiliser le terrain de jeu DALL-E dans **Azure OpenAI Studio** pour expérimenter la génération d’images.
+Vous pouvez utiliser le terrain de jeu Images dans **Azure AI Studio** pour expérimenter la génération d’images.
 
-1. Dans le portail Azure, dans la page **Vue d’ensemble** de votre ressource Azure OpenAI, utilisez le bouton **Explorer** pour ouvrir Azure OpenAI Studio sous un nouvel onglet du navigateur. Vous pouvez aussi accéder à [Azure OpenAI Studio](https://oai.azure.com) directement sur `https://oai.azure.com`.
-2. Dans la section **Terrain de jeu**, sélectionnez le terrain de jeu **DALL-E**. Un déploiement du modèle DALL-E appelé *Dalle3* est créé automatiquement.
-3. Dans la zone **Prompt**, entrez une description d’une image que vous souhaitez générer. Par exemple, `An elephant on a skateboard`, puis sélectionnez **Générer** et visualisez l’image générée.
+1. Dans la section **Terrain de jeu Images**, votre déploiement de DALL-E 3 doit être sélectionné automatiquement. Si ce n’est pas le cas, sélectionnez-le dans la liste déroulante des déploiements.
+1. Dans la zone **Prompt**, entrez une description d’une image que vous souhaitez générer. Par exemple, `An elephant on a skateboard`, puis sélectionnez **Générer** et visualisez l’image générée.
 
-    ![Terrain de jeu DALL-E dans Azure OpenAI Studio avec une image générée.](../media/dall-e-playground.png)
+    ![Terrain de jeu Images dans Azure AI Studio avec une image générée.](../media/images-playground.png)
 
-4. Modifiez le prompt pour fournir une description plus spécifique. Par exemple, `An elephant on a skateboard in the style of Picasso`. Ensuite, générez la nouvelle image et regardez les résultats.
+1. Modifiez le prompt pour fournir une description plus spécifique. Par exemple, `An elephant on a skateboard in the style of Picasso`. Ensuite, générez la nouvelle image et regardez les résultats.
 
-    ![Terrain de jeu DALL-E dans Azure OpenAI Studio avec deux images générées.](../media/dall-e-playground-new-image.png)
+    ![Terrain de jeu Images dans Azure AI Studio avec deux images générées.](../media/images-playground-new-style.png)
 
 ## Utiliser l’API REST pour générer des images
 
@@ -87,6 +95,8 @@ Vous êtes maintenant prêt à explorer le code utilisé pour appeler l’API RE
     - Le code envoie une requête https au point de terminaison de votre service, y compris la clé de votre service dans l’en-tête. Ces deux valeurs sont obtenues dans le fichier de configuration.
     - La requête contient certains paramètres, notamment le prompt sur lequel doit être basée l’image, le nombre d’images à générer et la taille de la ou des images générées.
     - La réponse contient un prompt révisé que le modèle DALL-E a extrapolé du prompt fourni par l’utilisateur pour le rendre plus descriptif, ainsi que l’URL de l’image générée.
+    
+    > **Important** : si vous avez donné à votre déploiement un nom autre que celui recommandé, *dalle3*, vous devez modifier le code pour utiliser le nom de votre déploiement.
 
 ### Exécuter l’application
 
