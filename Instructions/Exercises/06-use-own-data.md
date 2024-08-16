@@ -78,6 +78,7 @@ Pour déployer ces modèles, vous allez utiliser AI Studio.
 1. Dans le portail Azure, accédez à votre ressource Azure OpenAI. Utilisez ensuite le lien pour ouvrir votre ressource dans **Azure AI Studio**.
 1. Dans Azure AI Studio, sur la page **Déploiements**, affichez vos déploiements de modèles existants. Créez ensuite un nouveau déploiement de base du modèle **text-embedding-ada-002** avec les paramètres suivants :
     - **Nom du déploiement** : text-embedding-ada-002
+    - **Modèle** : text-embedding-ada-002
     - **Version du modèle** : *utiliser la version par défaut*
     - **Type de déploiement** : Standard
     - **Limite de débit de jetons par minute** : 5 000\*

@@ -44,14 +44,14 @@ Azure fournit un portail web appelé **Azure AI Studio**, que vous pouvez utilis
 > **Remarque** : lorsque vous utilisez Azure AI Studio, des boîtes de message qui suggèrent des tâches à effectuer peuvent être affichées. Vous pouvez les fermer et suivre les étapes de cet exercice.
 
 1. Dans le portail Azure, sur la page **Vue d’ensemble** de votre ressource Azure OpenAI, faites défiler jusqu’à la section **Démarrer** et sélectionnez le bouton permettant d’accéder à **AI Studio**.
-1. Dans Azure AI Studio, dans le panneau de gauche, sélectionnez la page **Déploiements** et affichez vos modèles de déploiement existants. Si vous n’en avez pas encore, créez un déploiement du modèle **gpt-35-turbo-16k** avec les paramètres suivants :
+1. Dans Azure AI Studio, dans le panneau de gauche, sélectionnez la page **Deployments** et affichez vos modèles de déploiement existants. Si vous n’en avez pas encore, créez un déploiement du modèle **gpt-35-turbo-16k** avec les paramètres suivants :
     - **Nom du déploiement** : *nom unique de votre choix*
     - **Modèle** : gpt-35-turbo-16k *(si le modèle 16k n’est pas disponible, choisissez gpt-35-turbo)*
-    - **Version du modèle** : *utiliser la version par défaut*
+    - **Model version** : *utiliser la version par défaut*
     - **Type de déploiement** : Standard
     - **Limite de débit de jetons par minute** : 5 000\*
     - **Filtre de contenu** : valeur par défaut
-    - **Activer le quota dynamique** : désactivé
+    - **Enable dynamic quota** : désactivé
 
     > \* Une limite de débit de 5 000 jetons par minute est plus que suffisante pour effectuer cet exercice tout permettant à d’autres personnes d’utiliser le même abonnement.
 
@@ -59,11 +59,11 @@ Azure fournit un portail web appelé **Azure AI Studio**, que vous pouvez utilis
 
 Commençons par explorer quelques techniques d’ingénierie rapide dans Chat Playground.
 
-1. Dans la section **Terrain de jeu**, sélectionnez la page **Conversation**. La page du terrain de jeu **Conversation** se compose d’une rangée de boutons et de deux panneaux principaux (qui peuvent être disposés horizontalement de droite à gauche ou verticalement de haut en bas en fonction de la résolution de l’écran) :
+1. Dans la section **Terrain de jeu**, sélectionnez la page **Conversation**. La page du terrain de jeu **Chat** se compose d’une rangée de boutons et de deux panneaux principaux (qui peuvent être disposés horizontalement de droite à gauche ou verticalement de haut en bas en fonction de la résolution de l’écran) :
     - **Configuration** : utilisée pour sélectionner votre déploiement, définir le message système et définir des paramètres pour interagir avec votre déploiement.
     - **Session de conversation** : utilisée pour envoyer des messages de conversation et voir les réponses.
-2. Sous **Déploiements**, vérifiez que votre déploiement de modèle gpt-35-turbo-16k est sélectionné.
-1. Passez en revue le **message système** par défaut, qui doit être *Vous êtes un assistant IA qui aide les personnes à trouver des informations.*
+2. Sous **Deployments**, vérifiez que votre déploiement de modèle gpt-35-turbo-16k est sélectionné.
+1. Passez en revue le **message système** par défaut, qui doit être *You are an AI assistant that helps people find information.*
 4. Dans la **session Chat**, soumettez la requête suivante :
 
     ```prompt
@@ -82,7 +82,7 @@ Commençons par explorer quelques techniques d’ingénierie rapide dans Chat Pl
 
 5. Dans la section **Configuration**, remplacez le message système par `You are a news aggregator that categorizes news articles.`.
 
-6. Sous le nouveau message système, sélectionnez le bouton **Ajouter une section** et choisissez **Exemples**. Ajoutez ensuite l’exemple suivant.
+6. Sous le nouveau message système, sélectionnez le bouton **Add section** et choisissez **Examples**. Ajoutez ensuite l’exemple suivant.
 
     **Utilisateur** :
     
@@ -127,7 +127,7 @@ Commençons par explorer quelques techniques d’ingénierie rapide dans Chat Pl
     Entertainment
     ```
 
-8. Utilisez le bouton **Appliquer les changements** en haut de la section **Configuration** pour enregistrer vos modifications.
+8. Utilisez le bouton **Apply changes** en haut de la section **Configuration** pour enregistrer vos modifications.
 
 9. Dans la section **Session de conversation**, renvoyez l'invite suivante :
 
@@ -210,7 +210,7 @@ Les applications pour C# et Python ont été fournies, et les deux applications 
     
 4. Mettez à jour les valeurs de configuration pour inclure :
     - Le **point de terminaison** et une **clé** de la ressource Azure OpenAI que vous avez créée (disponible sur la page **Clés et point de terminaison** de votre ressource Azure OpenAI dans le portail Azure).
-    - Le **nom de déploiement** que vous avez spécifié pour votre modèle de déploiement (disponible dans la page **Déploiements** dans Azure AI Studio).
+    - Le **nom de déploiement** que vous avez spécifié pour votre modèle de déploiement (disponible sur la page **Deployments** dans Azure AI Studio).
 5. Enregistrez le fichier de configuration.
 
 ## Ajouter du code pour utiliser Azure OpenAI Service
@@ -301,7 +301,7 @@ Vous êtes maintenant prêt à utiliser le Kit de développement logiciel (SDK) 
 
 Maintenant que votre application a été configurée, exécutez-la pour envoyer votre prompt à votre modèle et observer la réponse. Vous remarquerez que la seule différence entre les différentes options est le contenu du prompt, tous les autres paramètres (tels que le nombre de jetons et la température) restent identiques pour chaque prompt.
 
-1. Dans le dossier de votre langue préférée, ouvrez `system.txt` dans Visual Studio Code. Pour chacune des interactions, vous saisirez le **message système** dans ce fichier et l'enregistrerez. Chaque itération s’interrompt d’abord pour vous permettre de modifier le message système.
+1. Dans le dossier de votre langue préférée, ouvrez `system.txt` dans Visual Studio Code. Pour chacune des interactions, vous saisirez le **message système** dans ce fichier et l’enregistrerez. Chaque itération s’interrompt d’abord pour vous permettre de modifier le message système.
 1. Dans le volet de terminal interactif, vérifiez que le contexte du dossier est le dossier correspondant à votre langue préférée. Exécutez ensuite la commande suivante pour exécuter l’application.
 
     - **C#**  : `dotnet run`
@@ -340,6 +340,8 @@ Maintenant que votre application a été configurée, exécutez-la pour envoyer 
     - It specializes in elephants 
     - Call for donations to be given at our website
     ```
+
+    > **Conseil** : la saisie automatique dans la machine virtuelle ne fonctionne pas correctement avec les invites multilignes. Si vous rencontrez ce problème, copiez l’invite entière, puis collez-la dans Visual Studio Code.
 
 1. Observez la sortie. Cette fois, vous verrez probablement le format d’un e-mail avec les animaux spécifiques inclus, ainsi que l’appel aux dons.
 1. Ensuite, entrez les invites suivantes qui spécifient également le contenu :
