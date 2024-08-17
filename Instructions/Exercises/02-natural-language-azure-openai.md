@@ -39,17 +39,19 @@ Si vous n’en avez pas déjà une, approvisionnez une ressource Azure OpenAI da
 
 ## Déployer un modèle
 
-Azure OpenAI fournit un portail web appelé **Azure OpenAI Studio**, que vous pouvez utiliser pour déployer, gérer et explorer des modèles. Vous allez commencer votre exploration d’Azure OpenAI en utilisant Azure OpenAI Studio pour déployer un modèle.
+Azure fournit un portail web appelé **Azure AI Studio**, que vous pouvez utiliser pour déployer, gérer et explorer des modèles. Vous allez commencer votre exploration d’Azure OpenAI en utilisant Azure AI Studio pour déployer un modèle.
 
-1. Sur la page **Vue d’ensemble** de votre ressource Azure OpenAI, utilisez le bouton **Accéder à Azure OpenAI Studio** pour ouvrir Azure OpenAI Studio sous un nouvel onglet du navigateur.
-2. Dans Azure OpenAI Studio, sur la page **Déploiements**, affichez vos déploiements de modèles existants. Si vous n’en avez pas encore, créez un déploiement du modèle **gpt-35-turbo-16k** avec les paramètres suivants :
+> **Remarque** : lorsque vous utilisez Azure AI Studio, des boîtes de message qui suggèrent des tâches à effectuer peuvent être affichées. Vous pouvez les fermer et suivre les étapes de cet exercice.
+
+1. Dans le portail Azure, sur la page **Vue d’ensemble** de votre ressource Azure OpenAI, faites défiler jusqu’à la section **Démarrer** et sélectionnez le bouton permettant d’accéder à **AI Studio**.
+1. Dans Azure AI Studio, dans le panneau de gauche, sélectionnez la page **Déploiements** et affichez vos modèles de déploiement existants. Si vous n’en avez pas encore, créez un déploiement du modèle **gpt-35-turbo-16k** avec les paramètres suivants :
     - **Nom du déploiement** : *nom unique de votre choix*
     - **Modèle** : gpt-35-turbo-16k *(si le modèle 16k n’est pas disponible, choisissez gpt-35-turbo)*
-    - **Version du modèle** : mise à jour automatique avec la valeur par défaut
+    - **Version du modèle** : *utiliser la version par défaut*
     - **Type de déploiement** : Standard
     - **Limite de débit de jetons par minute** : 5 000\*
     - **Filtre de contenu** : valeur par défaut
-    - **Activer le quota dynamique** :activé
+    - **Activer le quota dynamique** : désactivé
 
     > \* Une limite de débit de 5 000 jetons par minute est plus que suffisante pour effectuer cet exercice tout permettant à d’autres personnes d’utiliser le même abonnement.
 
@@ -95,7 +97,7 @@ Des applications pour C# et Python sont fournies. Les deux applications présent
     
 4. Mettez à jour les valeurs de configuration pour inclure :
     - Le **point de terminaison** et une **clé** de la ressource Azure OpenAI que vous avez créée (disponible sur la page **Clés et point de terminaison** de votre ressource Azure OpenAI dans le portail Azure).
-    - Le **nom de déploiement** que vous avez spécifié pour votre modèle de déploiement (disponible dans la page **Déploiements** d’Azure OpenAI Studio).
+    - Le **nom de déploiement** que vous avez spécifié pour votre modèle de déploiement (disponible sur la page **Déploiements** dans Azure AI Studio).
 5. Enregistrez le fichier de configuration.
 
 ## Ajouter du code pour utiliser Azure OpenAI Service

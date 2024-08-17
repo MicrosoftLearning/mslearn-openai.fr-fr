@@ -7,13 +7,17 @@ lab:
 
 Azure OpenAI Service vous permet d’utiliser vos propres données avec l’intelligence du LLM sous-jacent. Vous pouvez limiter le modèle afin qu’il utilise uniquement vos données pour les rubriques pertinentes, ou les fusionner avec les résultats du modèle préentraîné.
 
-Dans le scénario de cet exercice, vous allez jouer le rôle d’un développeur de logiciels qui travaille pour Margie’s Travel Agency. Vous allez découvrir comment utiliser l’IA générative pour rendre les tâches de codage plus faciles et plus efficaces. Les techniques utilisées dans l’exercice peuvent être appliquées à d’autres fichiers de code, langages de programmation et cas d’usage.
+Dans le scénario de cet exercice, vous allez jouer le rôle d’un développeur de logiciels qui travaille pour Margie’s Travel Agency. Vous allez découvrir comment utiliser Recherche Azure AI pour indexer vos propres données et les utiliser avec Azure OpenAI pour augmenter les invites.
 
-Cet exercice prend environ **20** minutes.
+Cet exercice prend environ **30** minutes.
 
-## Provisionner une ressource Azure OpenAI
+## Approvisionner des ressources Azure
 
-Si vous n’en avez pas déjà une, approvisionnez une ressource Azure OpenAI dans votre abonnement Azure.
+Pour effectuer cet exercice, vous avez besoin des éléments suivants :
+
+- Ressource Azure OpenAI.
+- Une ressource de Recherche Azure AI.
+- Une ressource de compte de stockage Azure
 
 1. Connectez-vous au **portail Azure** à l’adresse `https://portal.azure.com`.
 2. Créez une ressource **Azure OpenAI** avec les paramètres suivants :
@@ -35,17 +39,55 @@ Si vous n’en avez pas déjà une, approvisionnez une ressource Azure OpenAI da
 
     > \* Les ressources Azure OpenAI sont limitées par des quotas régionaux. Les régions répertoriées incluent le quota par défaut pour les types de modèle utilisés dans cet exercice. Le choix aléatoire d’une région réduit le risque d’atteindre sa limite de quota dans les scénarios où vous partagez un abonnement avec d’autres utilisateurs. Si une limite de quota est atteinte plus tard dans l’exercice, vous devrez peut-être créer une autre ressource dans une autre région.
 
-3. Attendez la fin du déploiement. Accédez ensuite à la ressource Azure OpenAI déployée dans le portail Azure.
+3. Pendant que la ressource Azure OpenAI est approvisionnée, créez une ressource **Recherche Azure AI** avec les paramètres suivants :
+    - **Abonnement** : *abonnement dans lequel vous avez approvisionné votre ressource Azure OpenAI*
+    - **Groupe de ressources** : *groupe de ressources dans lequel vous avez provisionné votre ressource Azure OpenAI*
+    - **Nom du service** : *nom unique de votre choix*
+    - **Emplacement** : *région dans laquelle vous avez approvisionné votre ressource Azure OpenAI*
+    - **Niveau tarifaire** : De base
+4. Pendant que la ressource Recherche Azure AI est approvisionnée, créez une ressource **Compte de stockage** avec les paramètres suivants :
+    - **Abonnement** : *abonnement dans lequel vous avez approvisionné votre ressource Azure OpenAI*
+    - **Groupe de ressources** : *groupe de ressources dans lequel vous avez provisionné votre ressource Azure OpenAI*
+    - **Nom du compte de stockage** : *nom unique de votre choix*
+    - **Région** : *région dans laquelle vous avez approvisionné votre ressource Azure OpenAI*
+    - **Performances** : standard
+    - **Redondance** : stockage localement redondant (LRS)
+5. Une fois les trois ressources déployées avec succès dans votre abonnement Azure, passez-les en revue dans le portail Azure et collectez les informations suivantes (dont vous aurez besoin plus loin dans l’exercice) :
+    - Le **point de terminaison** et une **clé** de la ressource Azure OpenAI que vous avez créée (disponible sur la page **Clés et point de terminaison** de votre ressource Azure OpenAI dans le portail Azure).
+    - Le point de terminaison de votre service Recherche Azure AI (valeur **url** dans la page de vue d’ensemble de votre ressource Recherche Azure AI dans le portail Azure).
+    - Une **clé d’administration principale** pour votre ressource Recherche Azure AI (disponible sur la page **Clés** de votre ressource Recherche Azure AI dans le portail Azure).
 
-## Déployer un modèle
+## Charger vos données
 
-Azure OpenAI fournit un portail web appelé **Azure OpenAI Studio**, que vous pouvez utiliser pour déployer, gérer et explorer des modèles. Vous allez commencer votre exploration d’Azure OpenAI en utilisant Azure OpenAI Studio pour déployer un modèle.
+Vous allez ancrer les invites que vous utilisez avec un modèle d’IA générative à l’aide de vos propres données. Dans cet exercice, les données se composent d’une collection de brochures de voyage de la société fictive *Margies Travel*.
 
-1. Sur la page **Vue d’ensemble** de votre ressource Azure OpenAI, utilisez le bouton **Accéder à Azure OpenAI Studio** pour ouvrir Azure OpenAI Studio sous un nouvel onglet du navigateur.
-2. Dans Azure OpenAI Studio, sur la page **Déploiements**, affichez vos déploiements de modèles existants. Si vous n’en avez pas encore, créez un déploiement du modèle **gpt-35-turbo-16k** avec les paramètres suivants :
-    - **Nom du déploiement** : *nom unique de votre choix*
+1. Dans un nouvel onglet de navigateur, téléchargez les données archivées d’une brochure à partir de `https://aka.ms/own-data-brochures`. Extrayez les brochures dans un dossier sur votre PC.
+1. Dans le portail Azure, accédez à votre compte de stockage et consultez la page **Navigateur de stockage**.
+1. Sélectionnez **Conteneurs d’objets blob**, puis ajoutez un conteneur appelé `margies-travel`.
+1. Sélectionnez le conteneur **margies-travel**, puis chargez les brochures .pdf que vous avez extraites précédemment dans le dossier racine du conteneur d’objets blob.
+
+## Déployer des modèles IA
+
+Vous allez utiliser deux modèles IA dans cet exercice :
+
+- Un modèle d’incorporation de texte pour *vectoriser* le texte des brochures afin qu’il puisse être indexé efficacement pour une utilisation dans les invites d’ancrage
+- Un modèle GPT que votre application peut utiliser pour générer des réponses aux invites qui sont ancrées dans vos données
+
+Pour déployer ces modèles, vous allez utiliser AI Studio.
+
+1. Dans le portail Azure, accédez à votre ressource Azure OpenAI. Utilisez ensuite le lien pour ouvrir votre ressource dans **Azure AI Studio**.
+1. Dans Azure AI Studio, sur la page **Déploiements**, affichez vos déploiements de modèles existants. Créez ensuite un nouveau déploiement de base du modèle **text-embedding-ada-002** avec les paramètres suivants :
+    - **Nom du déploiement** : text-embedding-ada-002
+    - **Modèle** : text-embedding-ada-002
+    - **Version du modèle** : *utiliser la version par défaut*
+    - **Type de déploiement** : Standard
+    - **Limite de débit de jetons par minute** : 5 000\*
+    - **Filtre de contenu** : valeur par défaut
+    - **Activer le quota dynamique** :activé
+1. Une fois le modèle d’incorporation de texte déployé, revenez à la page **Déploiements** et créez un nouveau déploiement du modèle **gpt-35-turbo-16k** avec les paramètres suivants :
+    - **Nom du déploiement** : gpt-35-turbo-16k
     - **Modèle** : gpt-35-turbo-16k *(si le modèle 16k n’est pas disponible, choisissez gpt-35-turbo)*
-    - **Version du modèle** : mise à jour automatique avec la valeur par défaut
+    - **Version du modèle** : *utiliser la version par défaut*
     - **Type de déploiement** : Standard
     - **Limite de débit de jetons par minute** : 5 000\*
     - **Filtre de contenu** : valeur par défaut
@@ -53,93 +95,31 @@ Azure OpenAI fournit un portail web appelé **Azure OpenAI Studio**, que vous po
 
     > \* Une limite de débit de 5 000 jetons par minute est plus que suffisante pour effectuer cet exercice tout permettant à d’autres personnes d’utiliser le même abonnement.
 
-## Observer un comportement de conversation normal sans ajouter vos propres données
+## Création d'un index
 
-Avant de connecter Azure OpenAI à vos données, observons d’abord comment le modèle de base répond aux requêtes sans aucune donnée de base.
+Pour faciliter l’utilisation de vos propres données dans une invite, vous allez les indexer à l’aide de Recherche Azure AI. Vous allez utiliser le modèle d’incorporation de texte que vous avez déployé précédemment pendant le processus d’indexation pour *vectoriser* les données de texte (suite à ce processus, chaque jeton de texte de l’index est représenté par des vecteurs numériques, ce qui les rend compatibles avec la façon dont un modèle d’IA générative représente le texte)
 
-1. Dans **Azure OpenAI Studio** sur `https://oai.azure.com`, dans la section **Terrain de jeu**, sélectionnez la page **Conversation**. La page du terrain de jeu **Conversation** se compose de trois sections principales :
-    - **Définition** : utilisée pour définir le contexte pour les réponses du modèle.
-    - **Session de conversation** : utilisée pour envoyer des messages de conversation et voir les réponses.
-    - **Configuration** : utilisée pour configurer les paramètres du modèle de déploiement.
-2. Dans la section **Configuration**, assurez-vous que votre modèle de déploiement est sélectionné.
-3. Dans la section **Définition**, sélectionnez le modèle de message système par défaut pour définir le contexte de la session de conversation. Le message système par défaut est *Vous êtes un assistant IA qui aide les personnes à trouver des informations*.
-4. Dans la **Session de conversation**, soumettez les requêtes suivantes et passez en revue les réponses :
+1. Dans le portail Azure, accédez à votre ressource Recherche Azure AI.
+1. Dans la page **Vue d’ensemble**, sélectionnez **Importation et vectorisation des données**.
+1. Dans la page **Configurer votre connexion de données**, sélectionnez **Stockage Blob Azure** et configurez la source de données avec les paramètres suivants :
+    - **Abonnement** : abonnement Azure dans lequel vous avez approvisionné votre compte de stockage
+    - **Compte de stockage d’objets blob** : sélectionnez le compte de stockage que vous avez créé précédemment
+    - **Conteneur d’objets blob** : margies-travel
+    - **Dossier d’objets blob** : *laisser vide*
+    - **Activer le suivi des suppressions** : non sélectionné
+    - **S’authentifier avec une identité managée** : non sélectionné
+1. Dans la page **Vectoriser votre texte**, sélectionnez les paramètres suivants :
+    - **Type** : Azure OpenAI
+    - **Abonnement** : abonnement Azure dans lequel vous avez approvisionné votre service Azure OpenAI
+    - **Azure OpenAI Service** : votre ressource Azure OpenAI Service
+    - **Modèle de déploiement** : text-embedding-ada-002
+    - **Type d’authentification** : clé API
+    - **Je reconnais que la connexion à un service Azure OpenAI entraîne des coûts supplémentaires pour mon compte** : sélectionné
+1. Sur la page suivante, <u>ne sélectionnez pas</u> les options permettant de vectoriser des images ou d’extraire des données avec des compétences en IA.
+1. Sur la page suivante, activez le classement sémantique et planifiez l’exécution de l’indexeur une seule fois.
+1. Sur la page finale, définissez le **préfixe du nom d’objets** sur `margies-index`, puis créez l’index.
 
-    ```prompt
-    I'd like to take a trip to New York. Where should I stay?
-    ```
-
-    ```prompt
-    What are some facts about New York?
-    ```
-
-    Essayez des questions similaires sur le tourisme et les lieux de séjour pour d’autres endroits qui seront inclus dans nos données de base, comme Londres ou San Francisco. Vous obtiendrez probablement des réponses complètes sur les quartiers, et quelques faits généraux sur la ville.
-
-## Connecter vos données dans le terrain de jeu de conversation
-
-Vous allez maintenant ajouter des données pour une agence de voyage fictive appelée *Margie’s Travel*. Vous verrez ensuite comment le modèle Azure OpenAI répond lorsqu’il utilise les brochures de Margie’s Travel comme données de base.
-
-1. Dans un nouvel onglet de navigateur, téléchargez les données archivées d’une brochure à partir de `https://aka.ms/own-data-brochures`. Extrayez les brochures dans un dossier sur votre PC.
-1. Dans Azure OpenAI Studio, dans le terrain de jeu **Conversation**, dans la section **Définition**, sélectionnez **Ajouter vos données**.
-1. Sélectionnez **Ajouter une source de données** et choisissez **Charger des fichiers**.
-1. Vous devez créer un compte de stockage et une ressource Recherche Azure AI. Dans la liste déroulante de la ressource de stockage, sélectionnez **Créer une ressource de stockage Blob Azure**, puis créez un compte de stockage avec les paramètres suivants. Pour tout ce qui n’est pas spécifié, conservez les paramètres par défaut.
-
-    - **Abonnement** : *votre abonnement Azure*
-    - **Groupe de ressources** : *Sélectionner le même groupe de ressources que celui de votre ressource Azure OpenAI*
-    - **Nom du compte de stockage** : *entrez un nom unique*
-    - **Région** : *Sélectionner la même région que celle de votre ressource Azure OpenAI*
-    - **Redondance** : stockage localement redondant (LRS)
-
-1. Pendant la création de la ressource du compte de stockage, revenez à Azure OpenAI Studio et sélectionnez **Créer une ressource Recherche Azure AI** avec les paramètres suivants. Pour tout ce qui n’est pas spécifié, conservez les paramètres par défaut.
-
-    - **Abonnement** : *votre abonnement Azure*
-    - **Groupe de ressources** : *Sélectionner le même groupe de ressources que celui de votre ressource Azure OpenAI*
-    - **Nom du service** : *entrez un nom unique*
-    - **Emplacement** : *Sélectionner le même emplacement que celui de votre ressource Azure OpenAI*
-    - **Niveau tarifaire** : De base
-
-1. Attendez que votre ressource de recherche soit déployée, puis revenez à Azure AI Studio.
-1. Dans **Ajouter des données**, entrez les valeurs suivantes pour votre source de données, puis sélectionnez **Suivant**.
-
-    - **Sélectionner la source de données** : Charger des fichiers
-    - **Abonnement** : votre abonnement Azure.
-    - **Sélectionner la ressource Stockage Blob Azure** : *Utiliser le bouton **Actualiser** pour reremplir la liste, puis choisir la ressource de stockage que vous avez créée*
-        - Activer CORS à l’invite
-    - **Sélectionner la ressource Recherche Azure AI** : *Utiliser le bouton **Actualiser** pour reremplir la liste, puis choisir la ressource de recherche que vous avez créée*
-    - **Entrer le nom de l’index** : `margiestravel`
-    - **Ajouter la recherche vectorielle à cette ressource de recherche** : décochée
-    - **Je reconnais que la connexion à un compte Recherche Azure AI entraîne l’utilisation de mon compte** : coché
-
-1. Dans la page **Charger des fichiers**, chargez les fichiers PDF téléchargés, puis sélectionnez **Suivant**.
-1. Dans la page **Gestion des données**, sélectionnez le type de recherche par **mot clé** dans la liste déroulante, puis **Suivant**.
-1. Dans la page **Connexion de données**, sélectionnez **Clé API**.
-1. Dans la page **Vérifier, puis terminer**, sélectionnez **Enregistrer et fermer** pour ajouter vos données. Cette opération peut prendre quelques minutes, pendant lesquelles vous devez laisser votre fenêtre ouverte. Une fois l’opération terminée, vous verrez la source de données, la ressource de recherche et l’index spécifiés dans la section **Définition**.
-
-    > **Conseil** : Parfois, la connexion entre votre nouvel index de recherche et Azure OpenAI Studio prend trop de temps. Si vous avez attendu quelques minutes et qu’il n’a toujours pas été connecté, vérifiez vos ressources Recherche IA dans le portail Azure. Si vous voyez l’index terminé, vous pouvez déconnecter la connexion de données dans Azure OpenAI Studio et l’ajouter à nouveau en spécifiant une source de données Recherche Azure AI et en sélectionnant votre nouvel index.
-
-## Discuter avec un modèle ancré dans vos données
-
-Maintenant que vous avez ajouté vos données, posez les mêmes questions que précédemment et voyez en quoi la réponse diffère.
-
-```prompt
-I'd like to take a trip to New York. Where should I stay?
-```
-
-```prompt
-What are some facts about New York?
-```
-
-Vous remarquerez une réponse très différente cette fois, avec des détails sur certains hôtels et une mention de Margie’s Travel, ainsi que des références à l’endroit d’où proviennent les informations fournies. Si vous ouvrez la référence PDF listée dans la réponse, vous verrez les mêmes hôtels que ceux fournis par le modèle.
-
-Essayez de l’interroger sur d’autres villes incluses dans les données de base, à savoir Dubaï, Las Vegas, Londres et San Francisco.
-
-> **Remarque** : **Ajouter vos données** est toujours en préversion, et peut ne pas toujours se comporter comme prévu pour cette fonctionnalité, par exemple fournir une référence incorrecte pour une ville non incluse dans les données de base.
-
-## Connectez votre application à vos propres données
-
-Explorons maintenant comment connecter votre application pour utiliser vos propres données.
-
-### Préparer le développement d’une application dans Visual Studio Code
+## Préparer le développement d’une application dans Visual Studio Code
 
 Examinons maintenant l’utilisation de vos propres données dans une application qui utilise le SDK Azure OpenAI Service. Vous allez développer votre application à l’aide de Visual Studio Code. Les fichiers de code de votre application ont été fournis dans un référentiel GitHub.
 
@@ -181,11 +161,11 @@ Les applications pour C# et Python ont été fournies, et les deux applications 
     
 4. Mettez à jour les valeurs de configuration pour inclure :
     - Le **point de terminaison** et une **clé** de la ressource Azure OpenAI que vous avez créée (disponible sur la page **Clés et point de terminaison** de votre ressource Azure OpenAI dans le portail Azure).
-    - Le **nom de déploiement** que vous avez spécifié pour votre modèle de déploiement (disponible dans la page **Déploiements** dans Azure OpenAI Studio).
+    - Le **nom de déploiement** que vous avez spécifié pour votre modèle de déploiement (disponible dans la page **Déploiements** dans Azure AI Studio).
     - Le point de terminaison de votre service de recherche (valeur **url** dans la page de vue d’ensemble de votre ressource de recherche dans le portail Azure).
     - Une **clé** de votre ressource de recherche (disponible sur la page **Clés** de votre ressource de recherche dans le portail Azure. Vous pouvez utiliser l’une des clés d’administration).
-    - Le nom de l’index de recherche (qui doit être `margiestravel`).
-1. Enregistrez le fichier de configuration.
+    - Le nom de l’index de recherche (qui doit être `margies-index`).
+5. Enregistrez le fichier de configuration.
 
 ### Ajouter du code pour utiliser Azure OpenAI Service
 
@@ -242,4 +222,4 @@ Maintenant que votre application a été configurée, exécutez-la pour envoyer 
 
 ## Nettoyage
 
-Lorsque vous avez terminé avec votre ressource Azure OpenAI, n’oubliez pas de la supprimer dans le **portail Azure** sur `https://portal.azure.com`. Veillez également à inclure le compte de stockage et la ressource de recherche, car ceux-ci peuvent entraîner un coût relativement élevé.
+Lorsque vous avez terminé avec votre ressource Azure OpenAI, n’oubliez pas de supprimer les ressources dans le **portail Azure** sur `https://portal.azure.com`. Veillez également à inclure le compte de stockage et la ressource de recherche, car ceux-ci peuvent entraîner un coût relativement élevé.
