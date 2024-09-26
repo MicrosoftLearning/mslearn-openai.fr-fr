@@ -115,7 +115,7 @@ Pour faciliter l’utilisation de vos propres données dans une invite, vous all
     - **Modèle de déploiement** : text-embedding-ada-002
     - **Type d’authentification** : clé API
     - **Je reconnais que la connexion à un service Azure OpenAI entraîne des coûts supplémentaires pour mon compte** : sélectionné
-1. Sur la page suivante, <u>ne sélectionnez pas</u> les options permettant de vectoriser des images ou d’extraire des données avec des compétences en IA.
+1. Sur la page suivante, <u>ne sélectionnez pas</u> l’option permettant de vectoriser des images ou d’extraire des données avec des compétences en IA.
 1. Sur la page suivante, activez le classement sémantique et planifiez l’exécution de l’indexeur une seule fois.
 1. Sur la page finale, définissez le **préfixe du nom d’objets** sur `margies-index`, puis créez l’index.
 

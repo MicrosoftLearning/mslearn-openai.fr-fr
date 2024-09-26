@@ -44,14 +44,14 @@ Azure fournit un portail web appelé **Azure AI Studio**, que vous pouvez utilis
 > **Remarque** : lorsque vous utilisez Azure AI Studio, des boîtes de message qui suggèrent des tâches à effectuer peuvent être affichées. Vous pouvez les fermer et suivre les étapes de cet exercice.
 
 1. Dans le portail Azure, sur la page **Vue d’ensemble** de votre ressource Azure OpenAI, faites défiler jusqu’à la section **Démarrer** et sélectionnez le bouton permettant d’accéder à **AI Studio**.
-1. Dans Azure AI Studio, dans le panneau de gauche, sélectionnez la page **Déploiements** et affichez vos modèles de déploiement existants. Si vous n’en avez pas encore, créez un déploiement du modèle **gpt-35-turbo-16k** avec les paramètres suivants :
+1. Dans Azure AI Studio, dans le panneau de gauche, sélectionnez la page **Deployments** et affichez vos modèles de déploiement existants. Si vous n’en avez pas encore, créez un déploiement du modèle **gpt-35-turbo-16k** avec les paramètres suivants :
     - **Nom du déploiement** : *nom unique de votre choix*
     - **Modèle** : gpt-35-turbo-16k *(si le modèle 16k n’est pas disponible, choisissez gpt-35-turbo)*
-    - **Version du modèle** : *utiliser la version par défaut*
+    - **Model version** : *utiliser la version par défaut*
     - **Type de déploiement** : Standard
     - **Limite de débit de jetons par minute** : 5 000\*
     - **Filtre de contenu** : valeur par défaut
-    - **Activer le quota dynamique** : désactivé
+    - **Enable dynamic quota** : désactivé
 
     > \* Une limite de débit de 5 000 jetons par minute est plus que suffisante pour effectuer cet exercice tout permettant à d’autres personnes d’utiliser le même abonnement.
 
@@ -59,7 +59,7 @@ Azure fournit un portail web appelé **Azure AI Studio**, que vous pouvez utilis
 
 Avant de l’utiliser dans votre application, examinez comment Azure OpenAI peut générer et expliquer du code dans le terrain de jeu de conversation.
 
-1. Dans la section **Terrain de jeu**, sélectionnez la page **Conversation**. La page du terrain de jeu **Conversation** se compose d’une rangée de boutons et de deux panneaux principaux (qui peuvent être disposés horizontalement de droite à gauche ou verticalement de haut en bas en fonction de la résolution de l’écran) :
+1. Dans la section **Terrain de jeu**, sélectionnez la page **Conversation**. La page du terrain de jeu **Chat** se compose d’une rangée de boutons et de deux panneaux principaux (qui peuvent être disposés horizontalement de droite à gauche ou verticalement de haut en bas en fonction de la résolution de l’écran) :
     - **Configuration** : utilisée pour sélectionner votre déploiement, définir le message système et définir des paramètres pour interagir avec votre déploiement.
     - **Session de conversation** : utilisée pour envoyer des messages de conversation et voir les réponses.
 1. Sous **Déploiements**, vérifiez que votre déploiement de modèle est sélectionné.
@@ -154,7 +154,7 @@ Des applications pour C# et Python sont fournies, ainsi qu’un exemple de fichi
     
 4. Mettez à jour les valeurs de configuration pour inclure :
     - Le **point de terminaison** et une **clé** de la ressource Azure OpenAI que vous avez créée (disponible sur la page **Clés et point de terminaison** de votre ressource Azure OpenAI dans le portail Azure).
-    - Le **nom de déploiement** que vous avez spécifié pour votre modèle de déploiement (disponible dans la page **Déploiements** dans Azure AI Studio).
+    - Le **nom de déploiement** que vous avez spécifié pour votre modèle de déploiement (disponible sur la page **Deployments** dans Azure AI Studio).
 5. Enregistrez le fichier de configuration.
 
 ## Ajouter du code pour utiliser votre modèle de service Azure OpenAI
