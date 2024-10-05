@@ -44,14 +44,14 @@ Azure fournit un portail web appelé **Azure AI Studio**, que vous pouvez utilis
 > **Remarque** : lorsque vous utilisez Azure AI Studio, des boîtes de message qui suggèrent des tâches à effectuer peuvent être affichées. Vous pouvez les fermer et suivre les étapes de cet exercice.
 
 1. Dans le portail Azure, sur la page **Vue d’ensemble** de votre ressource Azure OpenAI, faites défiler jusqu’à la section **Démarrer** et sélectionnez le bouton permettant d’accéder à **AI Studio**.
-1. Dans Azure AI Studio, dans le panneau de gauche, sélectionnez la page **Déploiements** et affichez vos modèles de déploiement existants. Si vous n’en avez pas encore, créez un déploiement du modèle **gpt-35-turbo-16k** avec les paramètres suivants :
+1. Dans Azure AI Studio, dans le panneau de gauche, sélectionnez la page **Deployments** et affichez vos modèles de déploiement existants. Si vous n’en avez pas encore, créez un déploiement du modèle **gpt-35-turbo-16k** avec les paramètres suivants :
     - **Nom du déploiement** : *nom unique de votre choix*
     - **Modèle** : gpt-35-turbo-16k *(si le modèle 16k n’est pas disponible, choisissez gpt-35-turbo)*
-    - **Version du modèle** : *utiliser la version par défaut*
+    - **Model version** : *utiliser la version par défaut*
     - **Type de déploiement** : Standard
     - **Limite de débit de jetons par minute** : 5 000\*
     - **Filtre de contenu** : valeur par défaut
-    - **Activer le quota dynamique** : désactivé
+    - **Enable dynamic quota** : désactivé
 
     > \* Une limite de débit de 5 000 jetons par minute est plus que suffisante pour effectuer cet exercice tout permettant à d’autres personnes d’utiliser le même abonnement.
 
@@ -61,10 +61,10 @@ Maintenant que vous avez déployé un modèle, vous pouvez l’utiliser pour gé
 
 > **Remarque :** Le terrain de jeu *Conversation* utilise l’API *ChatCompletions* plutôt que l’ancienne API *Completions* utilisée par le terrain de jeu d’*achèvements*. Le terrain de jeu d’achèvements est fourni pour la compatibilité avec les modèles plus anciens.
 
-1. Dans la section **Terrain de jeu**, sélectionnez la page **Conversation**. La page du terrain de jeu **Conversation** se compose d’une rangée de boutons et de deux panneaux principaux (qui peuvent être disposés horizontalement de droite à gauche ou verticalement de haut en bas en fonction de la résolution de l’écran) :
+1. Dans la section **Terrain de jeu**, sélectionnez la page **Conversation**. La page du terrain de jeu **Chat** se compose d’une rangée de boutons et de deux panneaux principaux (qui peuvent être disposés horizontalement de droite à gauche ou verticalement de haut en bas en fonction de la résolution de l’écran) :
     - **Configuration** : utilisée pour sélectionner votre déploiement, définir le message système et définir des paramètres pour interagir avec votre déploiement.
     - **Session de conversation** : utilisée pour envoyer des messages de conversation et voir les réponses.
-1. Sous **Déploiements**, vérifiez que votre déploiement de modèle gpt-35-turbo-16k est sélectionné.
+1. Sous **Deployments**, vérifiez que votre déploiement de modèle gpt-35-turbo-16k est sélectionné.
 1. Passez en revue le **message système** par défaut, qui doit être *Vous êtes un assistant IA qui aide les personnes à trouver des informations.* Le message système est inclus dans les invites envoyées au modèle et fournit un contexte pour les réponses du modèle ; définition des attentes quant à la façon dont un agent d’IA basé sur le modèle doit interagir avec l’utilisateur.
 1. Dans le panneau de **session de conversation**, entrez la requête utilisateur `How can I use generative AI to help me market a new product?`.
 
@@ -136,6 +136,8 @@ Vous avez exploré la façon dont le message système, les exemples et les invit
 ## Déployer votre modèle sur une application web
 
 Maintenant que vous avez exploré certaines des fonctionnalités d’un modèle d’IA générative dans le terrain de jeu Azure AI Studio, vous pouvez déployer une application web Azure pour fournir une interface d’agent d’IA de base par le biais de laquelle les utilisateurs peuvent discuter avec le modèle.
+
+> **Remarque** : Azure AI Studio est toujours en préversion. Pour certains utilisateurs, le déploiement sur l’application web ne peut pas être effectué en raison d’un bogue dans le modèle dans le studio. Si c’est le cas, ignorez cette section.
 
 1. En haut à droite de la page du terrain de jeu de **conversation**, dans le menu **Déployer sur**, sélectionnez **Une nouvelle application web**.
 1. Dans la boîte de dialogue **Déployer sur une application web**, créez une application web avec les paramètres suivants :
