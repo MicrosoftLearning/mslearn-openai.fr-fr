@@ -161,7 +161,7 @@ Les applications pour C# et Python ont été fournies, et les deux applications 
     
 4. Mettez à jour les valeurs de configuration pour inclure :
     - Le **point de terminaison** et une **clé** de la ressource Azure OpenAI que vous avez créée (disponible sur la page **Clés et point de terminaison** de votre ressource Azure OpenAI dans le portail Azure).
-    - Le **nom de déploiement** que vous avez spécifié pour votre modèle de déploiement (disponible dans la page **Déploiements** dans Azure AI Studio).
+    - Le **nom de déploiement** que vous avez spécifié pour le déploiement de votre modèle gpt-35-turbo (disponible sur la page **Deployments** dans Azure AI Studio).
     - Le point de terminaison de votre service de recherche (valeur **url** dans la page de vue d’ensemble de votre ressource de recherche dans le portail Azure).
     - Une **clé** de votre ressource de recherche (disponible sur la page **Clés** de votre ressource de recherche dans le portail Azure. Vous pouvez utiliser l’une des clés d’administration).
     - Le nom de l’index de recherche (qui doit être `margies-index`).
