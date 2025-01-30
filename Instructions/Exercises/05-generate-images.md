@@ -26,8 +26,8 @@ Avant de pouvoir utiliser Azure OpenAI pour générer des images, vous devez app
     > \* Les modèles DALL-E 3 sont disponibles uniquement dans les ressources Azure OpenAI Service dans les régions **USA Est** et **Suède Centre**.
 
 1. Attendez la fin du déploiement. Accédez ensuite à la ressource Azure OpenAI déployée dans le portail Azure.
-1. Sur la page **Vue d’ensemble** de votre ressource Azure OpenAI, faites défiler jusqu’à la section **Démarrer** et sélectionnez le bouton permettant d’accéder à **AI Studio**.
-1. Dans Azure AI Studio, dans le panneau de gauche, sélectionnez la page **Déploiements** et affichez vos modèles de déploiement existants. Si vous n’en avez pas encore pour DALL-E 3, créez un déploiement du modèle **dall-e-3** avec les paramètres suivants :
+1. Sur la page **Vue d’ensemble** de votre ressource Azure OpenAI,, faites défiler jusqu’à la section **Démarrer** et sélectionnez le bouton permettant d’accéder au **portail AI Foundry** (anciennement AI Studio).
+1. Dans le portail Azur AI Foundry, dans le panneau de gauche, sélectionnez la page **Déploiements** et affichez vos modèles de déploiement existants. Si vous n’en avez pas encore pour DALL-E 3, créez un déploiement du modèle **dall-e-3** avec les paramètres suivants :
     - **Nom du déploiement** : dalle3
     - **Version du modèle** : *utiliser la version par défaut*
     - **Type de déploiement** : Standard
@@ -38,16 +38,16 @@ Avant de pouvoir utiliser Azure OpenAI pour générer des images, vous devez app
 
 ## Explorer la génération d’images sur le terrain de jeu Images
 
-Vous pouvez utiliser le terrain de jeu Images dans **Azure AI Studio** pour expérimenter la génération d’images.
+Vous pouvez utiliser le terrain de jeu Images dans le **portail Azure AI Foundry** pour expérimenter la génération d’images.
 
 1. Dans la section **Terrain de jeu Images**, votre déploiement de DALL-E 3 doit être sélectionné automatiquement. Si ce n’est pas le cas, sélectionnez-le dans la liste déroulante des déploiements.
 1. Dans la zone **Prompt**, entrez une description d’une image que vous souhaitez générer. Par exemple, `An elephant on a skateboard`, puis sélectionnez **Générer** et visualisez l’image générée.
 
-    ![Terrain de jeu Images dans Azure AI Studio avec une image générée.](../media/images-playground.png)
+    ![Terrain de jeu Images dans le portail Azure AI Foundry avec une image générée.](../media/images-playground.png)
 
 1. Modifiez le prompt pour fournir une description plus spécifique. Par exemple, `An elephant on a skateboard in the style of Picasso`. Ensuite, générez la nouvelle image et regardez les résultats.
 
-    ![Terrain de jeu Images dans Azure AI Studio avec deux images générées.](../media/images-playground-new-style.png)
+    ![Terrain de jeu Images dans le portail Azure AI Foundry avec deux images générées.](../media/images-playground-new-style.png)
 
 ## Utiliser l’API REST pour générer des images
 
