@@ -5,7 +5,7 @@ lab:
 
 # Démarrage de Azure OpenAI Service
 
-Azure OpenAI Service intègre les modèles d’IA générative développés par OpenAI à la plateforme Azure, ce qui vous permet de développer de puissantes solutions d’IA qui bénéficient de la sécurité, de la scalabilité et de l’intégration de services fournies par la plateforme cloud Azure. Dans cet exercice, vous allez apprendre à utiliser Azure OpenAI en approvisionnant le service en tant que ressource Azure et en utilisant Azure AI Studio pour déployer et explorer des modèles d’IA générative.
+Azure OpenAI Service intègre les modèles d’IA générative développés par OpenAI à la plateforme Azure, ce qui vous permet de développer de puissantes solutions d’IA qui bénéficient de la sécurité, de la scalabilité et de l’intégration de services fournies par la plateforme cloud Azure. Dans cet exercice, vous allez apprendre à utiliser Azure OpenAI en approvisionnant le service en tant que ressource Azure et en utilisant Azure AI Foundry pour déployer et explorer des modèles d’IA générative.
 
 Dans le scénario de cet exercice, vous allez jouer le rôle d’un développeur de logiciels qui a été chargé d’implémenter un agent d’IA capable d’utiliser l’IA générative pour aider une organisation marketing à améliorer son efficacité pour atteindre les clients et lancer la publicité de nouveaux produits. Les techniques utilisées dans l’exercice peuvent être appliquées à n’importe quel scénario dans lequel une organisation souhaite utiliser des modèles d’IA générative pour aider les employés à être plus efficaces et productifs.
 
@@ -39,12 +39,12 @@ Si vous n’en avez pas déjà une, approvisionnez une ressource Azure OpenAI da
 
 ## Déployer un modèle
 
-Azure fournit un portail web appelé **Azure AI Studio**, que vous pouvez utiliser pour déployer, gérer et explorer des modèles. Vous allez commencer votre exploration d’Azure OpenAI en utilisant Azure AI Studio pour déployer un modèle.
+Azure fournit un portail web appelé **Azure AI Foundry**, que vous pouvez utiliser pour déployer, gérer et explorer des modèles. Vous allez commencer votre exploration d’Azure OpenAI en utilisant le portail Azure AI Foundry pour déployer un modèle.
 
-> **Remarque** : lorsque vous utilisez Azure AI Studio, des boîtes de message qui suggèrent des tâches à effectuer peuvent être affichées. Vous pouvez les fermer et suivre les étapes de cet exercice.
+> **Remarque** : lorsque vous utilisez le portail Azure AI Foundry, des boîtes de message qui suggèrent des tâches à effectuer peuvent être affichées. Vous pouvez les fermer et suivre les étapes de cet exercice.
 
-1. Dans le portail Azure, sur la page **Vue d’ensemble** de votre ressource Azure OpenAI, faites défiler jusqu’à la section **Démarrer** et sélectionnez le bouton permettant d’accéder à **AI Studio**.
-1. Dans Azure AI Studio, dans le panneau de gauche, sélectionnez la page **Deployments** et affichez vos modèles de déploiement existants. Si vous n’en avez pas encore, créez un déploiement du modèle **gpt-35-turbo-16k** avec les paramètres suivants :
+1. Dans le portail Azure, sur la page **Vue d’ensemble** de votre ressource Azure OpenAI, faites défiler jusqu’à la section **Démarrer** et sélectionnez le bouton permettant d’accéder au **portail AI Foundry** (anciennement AI Studio).
+1. Dans le portail Azur AI Foundry, dans le panneau de gauche, sélectionnez la page **Déploiements** et affichez vos modèles de déploiement existants. Si vous n’en avez pas encore, créez un déploiement du modèle **gpt-35-turbo-16k** avec les paramètres suivants :
     - **Nom du déploiement** : *nom unique de votre choix*
     - **Modèle** : gpt-35-turbo-16k *(si le modèle 16k n’est pas disponible, choisissez gpt-35-turbo)*
     - **Model version** : *utiliser la version par défaut*
@@ -57,7 +57,7 @@ Azure fournit un portail web appelé **Azure AI Studio**, que vous pouvez utilis
 
 ## Utiliser le terrain de jeu Conversation
 
-Maintenant que vous avez déployé un modèle, vous pouvez l’utiliser pour générer des réponses basées sur des invites en langage naturel. Le terrain de jeu *Conversation* dans Azure AI Studio fournit une interface de chatbot pour les modèles GPT 3.5 et ultérieurs.
+Maintenant que vous avez déployé un modèle, vous pouvez l’utiliser pour générer des réponses basées sur des invites en langage naturel. Le terrain de jeu *Conversation* dans le portail Azure AI Foundry fournit une interface de chatbot pour les modèles GPT 3.5 et ultérieurs.
 
 > **Remarque :** Le terrain de jeu *Conversation* utilise l’API *ChatCompletions* plutôt que l’ancienne API *Completions* utilisée par le terrain de jeu d’*achèvements*. Le terrain de jeu d’achèvements est fourni pour la compatibilité avec les modèles plus anciens.
 
@@ -135,9 +135,9 @@ Vous avez exploré la façon dont le message système, les exemples et les invit
 
 ## Déployer votre modèle sur une application web
 
-Maintenant que vous avez exploré certaines des fonctionnalités d’un modèle d’IA générative dans le terrain de jeu Azure AI Studio, vous pouvez déployer une application web Azure pour fournir une interface d’agent d’IA de base par le biais de laquelle les utilisateurs peuvent discuter avec le modèle.
+Maintenant que vous avez exploré certaines des fonctionnalités d’un modèle d’IA générative dans le terrain de jeu Azure AI Foundry, vous pouvez déployer une application web Azure pour fournir une interface d’agent d’IA de base par le biais de laquelle les utilisateurs peuvent discuter avec le modèle.
 
-> **Remarque** : Azure AI Studio est toujours en préversion. Pour certains utilisateurs, le déploiement sur l’application web ne peut pas être effectué en raison d’un bogue dans le modèle dans le studio. Si c’est le cas, ignorez cette section.
+> **Remarque** : pour certains utilisateurs, le déploiement sur l’application web ne peut pas être effectué en raison d’un bogue dans le modèle dans le studio. Si c’est le cas, ignorez cette section.
 
 1. En haut à droite de la page du terrain de jeu de **conversation**, dans le menu **Déployer sur**, sélectionnez **Une nouvelle application web**.
 1. Dans la boîte de dialogue **Déployer sur une application web**, créez une application web avec les paramètres suivants :
@@ -160,7 +160,7 @@ Maintenant que vous avez exploré certaines des fonctionnalités d’un modèle 
 
     > **Remarque** : Vous avez déployé le *modèle* sur une application web, mais ce déploiement n’inclut pas les paramètres système que vous avez définis dans le terrain de jeu. Par conséquent, la réponse peut ne pas refléter les exemples que vous avez spécifiés dans le terrain de jeu. Dans un scénario réel, vous devez ajouter une logique à votre application pour modifier l’invite afin qu’elle inclue les données contextuelles appropriées pour les types de réponse que vous souhaitez générer. Ce type de personnalisation dépasse le cadre de cet exercice d’introduction, mais vous pouvez en savoir plus sur les techniques d’ingénierie rapides et les API Azure OpenAI dans d’autres exercices et documentations produits.
 
-1. Une fois que vous avez terminé d’expérimenter votre modèle dans l’application web, fermez l’onglet de l’application web dans votre navigateur pour revenir à Azure AI Studio.
+1. Une fois que vous avez terminé d’expérimenter votre modèle dans l’application web, fermez l’onglet de l’application web dans votre navigateur pour revenir au portail Azure AI Foundry.
 
 ## Nettoyage
 
