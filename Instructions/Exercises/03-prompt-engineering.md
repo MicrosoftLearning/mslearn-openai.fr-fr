@@ -59,12 +59,12 @@ Azure fournit un portail web appelé **Azure AI Foundry**, que vous pouvez uti
 
 Commençons par explorer quelques techniques d’ingénierie rapide dans Chat Playground.
 
-1. Dans la section **Terrain de jeu**, sélectionnez la page **Conversation**. La page du terrain de jeu **Chat** se compose d’une rangée de boutons et de deux panneaux principaux (qui peuvent être disposés horizontalement de droite à gauche ou verticalement de haut en bas en fonction de la résolution de l’écran) :
+1. Dans le volet gauche, dans la section **Terrains de jeu**, sélectionnez la page **Conversation**. La page du terrain de jeu **Chat** se compose d’une rangée de boutons et de deux panneaux principaux (qui peuvent être disposés horizontalement de droite à gauche ou verticalement de haut en bas en fonction de la résolution de l’écran) :
     - **Configuration** : utilisée pour sélectionner votre déploiement, définir le message système et définir des paramètres pour interagir avec votre déploiement.
-    - **Session de conversation** : utilisée pour envoyer des messages de conversation et voir les réponses.
-2. Sous **Deployments**, vérifiez que votre déploiement de modèle gpt-35-turbo-16k est sélectionné.
-1. Passez en revue le **message système** par défaut, qui doit être *You are an AI assistant that helps people find information.*
-4. Dans la **session Chat**, soumettez la requête suivante :
+    - **Historique des conversations** : utilisée pour envoyer des messages de conversation et voir les réponses.
+2. Sous **Déploiements**, vérifiez que votre déploiement de modèle gpt-35-turbo-16k est sélectionné.
+1. Vérifiez le message système par défaut contenu dans la zone de texte immédiatement sous le déploiement sélectionné, qui devrait être *Vous êtes un assistant IA qui aide les gens à trouver des informations.*
+4. Dans l’**historique des conversations**, soumettez la requête suivante :
 
     ```prompt
     What kind of article is this?
@@ -80,7 +80,7 @@ Commençons par explorer quelques techniques d’ingénierie rapide dans Chat Pl
 
     La réponse fournit une description de l’article. Toutefois, supposons que vous souhaitez un format plus spécifique pour la catégorisation d’article.
 
-5. Dans la section **Configuration**, remplacez le message système par `You are a news aggregator that categorizes news articles.`.
+5. Dans la section **Configuration**, remplacez le message système par `You are a news aggregator that categorizes news articles.`
 
 6. Sous le nouveau message système, sélectionnez le bouton **Add section** et choisissez **Examples**. Ajoutez ensuite l’exemple suivant.
 
@@ -127,9 +127,9 @@ Commençons par explorer quelques techniques d’ingénierie rapide dans Chat Pl
     Entertainment
     ```
 
-8. Utilisez le bouton **Apply changes** en haut de la section **Configuration** pour enregistrer vos modifications.
+8. Utilisez le bouton **Appliquer les modifications** sous la zone de texte du message système de la section **Configuration** pour enregistrer vos modifications.
 
-9. Dans la section **Session de conversation**, renvoyez l'invite suivante :
+9. Dans la section **Historique des conversations**, renvoyez l’invite suivante :
 
     ```prompt
     What kind of article is this?
@@ -147,7 +147,7 @@ Commençons par explorer quelques techniques d’ingénierie rapide dans Chat Pl
 
 10. Remplacez le message système par le modèle par défaut, qui doit être `You are an AI assistant that helps people find information.` sans exemples. Ensuite, appliquez les modifications.
 
-11. Dans la section **session de Chat**, soumettez l'invite suivante :
+11. Dans l’**historique des conversations**, soumettez l’invite suivante :
 
     ```prompt
     # 1. Create a list of animals
@@ -359,7 +359,7 @@ Maintenant que votre application a été configurée, exécutez-la pour envoyer 
     - Rescue name is Contoso 
     - It specializes in elephants, as well as zebras and giraffes 
     - Call for donations to be given at our website 
-    \n Include a list of the current animals we have at our rescue after the signature, in the form of a table. These animals include elephants, zebras, gorillas, lizards, and jackrabbits.
+    Include a list of the current animals we have at our rescue after the signature, in the form of a table. These animals include elephants, zebras, gorillas, lizards, and jackrabbits.
     ```
 
 1. Observez la sortie et découvrez comment l’e-mail a changé en fonction de vos instructions claires.
@@ -378,7 +378,7 @@ Maintenant que votre application a été configurée, exécutez-la pour envoyer 
     - Rescue name is Contoso 
     - It specializes in elephants, as well as zebras and giraffes 
     - Call for donations to be given at our website 
-    \n Include a list of the current animals we have at our rescue after the signature, in the form of a table. These animals include elephants, zebras, gorillas, lizards, and jackrabbits.
+    Include a list of the current animals we have at our rescue after the signature, in the form of a table. These animals include elephants, zebras, gorillas, lizards, and jackrabbits.
     ```
 
 1. Observez la sortie. Cette fois, vous verrez probablement l’e-mail dans un format similaire, mais avec un ton beaucoup plus informel. Vous verrez probablement même des blagues !
