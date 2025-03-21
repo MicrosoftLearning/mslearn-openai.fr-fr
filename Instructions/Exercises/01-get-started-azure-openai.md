@@ -1,6 +1,7 @@
 ---
 lab:
   title: Démarrage de Azure OpenAI Service
+  status: stale
 ---
 
 # Démarrage de Azure OpenAI Service

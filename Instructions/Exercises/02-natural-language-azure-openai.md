@@ -1,6 +1,7 @@
 ---
 lab:
   title: Utiliser des kits SDK Azure OpenAI dans votre application
+  status: stale
 ---
 
 # Utiliser des API Azure OpenAI dans votre application

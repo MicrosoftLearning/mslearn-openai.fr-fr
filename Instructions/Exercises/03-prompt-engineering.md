@@ -1,6 +1,7 @@
 ---
 lab:
   title: Utiliser le prompt engineering dans votre application
+  status: stale
 ---
 
 # Utiliser le prompt engineering dans votre application
