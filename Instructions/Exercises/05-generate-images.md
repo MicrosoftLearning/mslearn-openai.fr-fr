@@ -43,8 +43,6 @@ Vous pouvez utiliser le terrain de jeu Images dans le **portail Azure AI Found
 1. Dans la section **Terrain de jeu Images**, votre déploiement de DALL-E 3 doit être sélectionné automatiquement. Si ce n’est pas le cas, sélectionnez-le dans la liste déroulante des déploiements.
 1. Dans la zone **Prompt**, entrez une description d’une image que vous souhaitez générer. Par exemple, `An elephant on a skateboard`, puis sélectionnez **Générer** et visualisez l’image générée.
 
-    ![Terrain de jeu Images dans le portail Azure AI Foundry avec une image générée.](../media/images-playground.png)
-
 1. Modifiez le prompt pour fournir une description plus spécifique. Par exemple, `An elephant on a skateboard in the style of Picasso`. Ensuite, générez la nouvelle image et regardez les résultats.
 
     ![Terrain de jeu Images dans le portail Azure AI Foundry avec deux images générées.](../media/images-playground-new-style.png)
