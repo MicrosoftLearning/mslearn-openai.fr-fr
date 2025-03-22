@@ -1,12 +1,13 @@
 ---
 lab:
-  title: Générer des images avec l’IA
-  description: Découvrez comment utiliser un modèle DALL-E OpenAI pour générer des images.
+  title: Générer des images à l’aide de l’IA
+  description: Découvrir comment utiliser un modèle DALL-E OpenAI pour générer des images.
+  status: new
 ---
 
-# Générer des images avec l’IA
+# Générer des images à l’aide de l’IA
 
-Dans cet exercice, vous utilisez le modèle d’IA générative DALL-E OpenAI pour générer des images. Vous allez développer votre application à l’aide d’Azure AI Foundry et du service Azure OpenAI.
+Dans cet exercice, vous utilisez le modèle d’IA générative OpenAI DALL-E pour générer des images. Vous allez développer votre application à l’aide d’Azure AI Foundry et d’Azure OpenAI Service.
 
 Cet exercice prend environ **30** minutes.
 
@@ -39,7 +40,7 @@ Commençons par créer un projet Azure AI Foundry.
 
 Vous êtes maintenant prêt à déployer un modèle DALL-E pour prendre en charge la génération d’images.
 
-1. Dans la barre d’outils située en haut à droite de votre projet Azure AI Foundry, utilisez l’icône **fonctionnalités en version préliminaires** pour activer la fonctionnalité **Déployer des modèles sur le service d’inférence de modèle Azure AI**. Cette fonctionnalité garantit que votre déploiement de modèle est disponible pour le service Inférence Azure AI, que vous utiliserez dans votre code d’application.
+1. Dans la barre d’outils située en haut à droite de votre projet Azure AI Foundry, utilisez l’icône **fonctionnalités en version préliminaires** pour activer la fonctionnalité **Déployer des modèles sur le service d’inférence de modèle Azure AI**.
 1. Dans le volet de gauche de votre projet, dans la section **Mes ressources**, sélectionnez la page **Modèles + points de terminaison**.
 1. Sur la page **Modèles + points de terminaison**, dans l’onglet **Déploiements de modèles**, dans le menu **+ Déployer un modèle**, sélectionnez **Déployer le modèle de base**.
 1. Recherchez le modèle **dall-e-3** dans la liste, puis sélectionnez-le et confirmez-le.
@@ -54,12 +55,12 @@ Vous êtes maintenant prêt à déployer un modèle DALL-E pour prendre en charg
 Avant de créer une application cliente, testons le modèle DALL-E dans le terrain de jeu.
 
 1. Dans la page du modèle DALL-E que vous avez déployé, sélectionnez **Ouvrir dans le terrain de jeu** (ou dans la page **Terrains de jeu**, ouvrez le **terrain de jeux d’images**).
-1. Vérifiez que votre déploiement de modèle DALL-E est sélectionné. Ensuite, dans la zone d’**invite**, entrez une invite telle que `Create an image of an robot eating spaghetti`.
+1. Vérifiez que votre déploiement de modèle DALL-E est sélectionné. Ensuite, dans la case **Invite**, saisissez une invite telle que `Create an image of an robot eating spaghetti`.
 1. Passez en revue l’image résultante dans le terrain de jeu :
 
     ![Capture d’écran du terrain de jeu d’images avec une image générée.](../media/images-playground.png)
 
-1. Entrez une invite de suivi, telle que `Show the robot in a restaurant`, et passez en revue l’image résultante.
+1. Saisissez une invite de suivi, telle que `Show the robot in a restaurant`, et examinez l'image obtenue.
 1. Continuez à tester avec de nouvelles invites pour affiner l’image jusqu’à ce que vous soyez satisfait de celle-ci.
 
 ## Créer une application cliente
@@ -138,7 +139,7 @@ Le modèle semble fonctionner dans le terrain de jeu. Vous pouvez maintenant uti
 
     Le fichier s’ouvre dans un éditeur de code.
 
-1. Dans le fichier de code, remplacez l’espace réservé **your_project_endpoint** par la chaîne de connexion de votre projet (copié à partir de la page **Vue d’ensemble** du projet dans le portail Azure AI Foundry) et l’espace réservé **your_model_deployment** par le nom que vous avez attribué à votre déploiement de modèle dall-e-3.
+1. Dans le fichier de code, remplacez l'espace réservé **your_project_endpoint** par la chaîne de connexion de votre projet (copiée à partir de la page **Aperçu** du projet sur le portail Azure AI Foundry), et l'espace réservé **your_model_deployment** par le nom que vous avez attribué à votre déploiement de modèle dall-e-3.
 1. Une fois que vous avez remplacé les espaces réservés, utilisez la commande **Ctrl+S** pour enregistrer vos modifications, puis utilisez la commande **Ctrl+Q** pour fermer l’éditeur de code tout en gardant la ligne de commande Cloud Shell ouverte.
 
 ### Écrire du code pour vous connecter à votre projet et converser avec votre modèle
@@ -222,7 +223,7 @@ Le modèle semble fonctionner dans le terrain de jeu. Vous pouvez maintenant uti
 
     ```
 
-1. Notez que le code inclut une boucle pour permettre à un utilisateur d’entrer une invite jusqu’à ce qu’il entre « quitter ». Ensuite, dans la section de boucle, sous le commentaire **Générer une image**, ajoutez le code suivant pour envoyer l’invite et récupérer l’URL de l’image générée à partir de votre modèle :
+1. Notez que le code inclut une boucle pour permettre à un utilisateur d’entrer une invite jusqu’à ce qu’il entre « quitter ». Ensuite, dans la section de boucle, sous le commentaire **Générer une image**, ajoutez le code suivant pour soumettre l'invite et récupérer l'URL de l'image générée à partir de votre modèle :
 
     **Python**
 
@@ -270,12 +271,12 @@ Le modèle semble fonctionner dans le terrain de jeu. Vous pouvez maintenant uti
    dotnet run
     ```
 
-1. Lorsque vous y êtes invité, entrez une demande d’image, telle que `Create an image of a robot eating pizza`. Au bout de quelques instants, l’application doit confirmer que l’image a été enregistrée.
+1. Lorsque vous y êtes invité, entrez une requête d'image, telle que `Create an image of a robot eating pizza`. Après quelques instants, l'application doit confirmer que l'image a été enregistrée.
 1. Essayez quelques invites supplémentaires. Lorsque vous avez terminé, entrez `quit` pour quitter le programme.
 
-    > **Note** : dans cette application simple, nous n’avons pas implémenté de logique pour conserver l’historique des conversations. Par conséquent, le modèle traite chaque invite comme une nouvelle requête sans contexte de l’invite précédente.
+    > **Remarque** : dans cette application simple, nous n'avons pas mis en place de logique pour conserver l'historique des conversations ; le modèle traitera donc chaque demande comme une nouvelle demande sans tenir compte du contexte de la demande précédente.
 
-1. Pour télécharger et afficher les images générées par votre application, dans la barre d’outils du volet Cloud Shell, utilisez le bouton **Charger/télécharger des fichiers** pour télécharger un fichier, puis ouvrez-le. Pour télécharger un fichier, complétez son chemin d’accès au fichier dans l’interface de téléchargement ; par exemple :
+1. Pour télécharger et visualiser les images générées par votre application, utilisez le bouton **Télécharger/charger des fichiers** dans la barre d'outils du volet Cloud Shell pour télécharger un fichier, puis ouvrez-le. Pour télécharger un fichier, complétez son chemin d’accès au fichier dans l’interface de téléchargement ; par exemple :
 
     **Python**
 
@@ -287,7 +288,7 @@ Le modèle semble fonctionner dans le terrain de jeu. Vous pouvez maintenant uti
 
 ## Résumé
 
-Dans cet exercice, vous avez utilisé Azure AI Foundry et le kit de développement logiciel (SDK) Azure OpenAI pour créer une application cliente utilisant un modèle DALL-E pour générer des images.
+Dans cet exercice, vous avez utilisé Azure AI Foundry et le SDK Azure OpenAI pour créer une application cliente utilisant un modèle DALL-E pour générer des images.
 
 ## Nettoyage
 
