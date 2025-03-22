@@ -1,13 +1,12 @@
 ---
 lab:
-  title: Générer des images à l’aide de l’IA
-  description: Découvrir comment utiliser un modèle DALL-E OpenAI pour générer des images.
-  status: new
+  title: Générer des images avec l’IA
+  description: Découvrez comment utiliser un modèle DALL-E OpenAI pour générer des images.
 ---
 
-# Générer des images à l’aide de l’IA
+# Générer des images avec l’IA
 
-Dans cet exercice, vous utilisez le modèle d’IA générative OpenAI DALL-E pour générer des images. Vous allez développer votre application à l’aide d’Azure AI Foundry et d’Azure OpenAI Service.
+Dans cet exercice, vous utilisez le modèle d'IA générative OpenAI DALL-E pour générer des images. Vous allez développer votre application à l’aide d’Azure AI Foundry et du service Azure OpenAI.
 
 Cet exercice prend environ **30** minutes.
 
@@ -54,13 +53,13 @@ Vous êtes maintenant prêt à déployer un modèle DALL-E pour prendre en charg
 
 Avant de créer une application cliente, testons le modèle DALL-E dans le terrain de jeu.
 
-1. Dans la page du modèle DALL-E que vous avez déployé, sélectionnez **Ouvrir dans le terrain de jeu** (ou dans la page **Terrains de jeu**, ouvrez le **terrain de jeux d’images**).
+1. Dans la page du modèle DALL-E que vous avez déployé, sélectionnez **Ouvrir dans le terrain de jeu** (ou dans la page **Terrains de jeu**, ouvrez le **Terrain de jeu d’images**).
 1. Vérifiez que votre déploiement de modèle DALL-E est sélectionné. Ensuite, dans la case **Invite**, saisissez une invite telle que `Create an image of an robot eating spaghetti`.
-1. Passez en revue l’image résultante dans le terrain de jeu :
+1. Examinez l’image obtenue dans le terrain de jeu :
 
-    ![Capture d’écran du terrain de jeu d’images avec une image générée.](../media/images-playground.png)
+    ![Capture d’écran du terrain de jeux d’images avec une image générée](../media/images-playground.png)
 
-1. Saisissez une invite de suivi, telle que `Show the robot in a restaurant`, et examinez l'image obtenue.
+1. Saisissez une invite de suivi, telle que `Show the robot in a restaurant`, et examinez l’image obtenue.
 1. Continuez à tester avec de nouvelles invites pour affiner l’image jusqu’à ce que vous soyez satisfait de celle-ci.
 
 ## Créer une application cliente
@@ -91,7 +90,7 @@ Le modèle semble fonctionner dans le terrain de jeu. Vous pouvez maintenant uti
 
 > **Note** : suivez les étapes de votre langage de programmation choisi.
 
-1. Une fois le référentiel cloné, accédez au dossier contenant les fichiers de code de l’application :  
+1. Une fois le référentiel cloné, naviguez jusqu’au dossier contenant les fichiers du code de l’application :  
 
     **Python**
 
@@ -139,7 +138,7 @@ Le modèle semble fonctionner dans le terrain de jeu. Vous pouvez maintenant uti
 
     Le fichier s’ouvre dans un éditeur de code.
 
-1. Dans le fichier de code, remplacez l'espace réservé **your_project_endpoint** par la chaîne de connexion de votre projet (copiée à partir de la page **Aperçu** du projet sur le portail Azure AI Foundry), et l'espace réservé **your_model_deployment** par le nom que vous avez attribué à votre déploiement de modèle dall-e-3.
+1. Dans le fichier de code, remplacez l’espace réservé **your_project_endpoint** par la chaîne de connexion de votre projet (copiée à partir de la page **Vue d’ensemble** du projet sur le portail Azure AI Foundry), et l’espace réservé **your_model_deployment** par le nom que vous avez attribué à votre déploiement de modèle dall-e-3.
 1. Une fois que vous avez remplacé les espaces réservés, utilisez la commande **Ctrl+S** pour enregistrer vos modifications, puis utilisez la commande **Ctrl+Q** pour fermer l’éditeur de code tout en gardant la ligne de commande Cloud Shell ouverte.
 
 ### Écrire du code pour vous connecter à votre projet et converser avec votre modèle
@@ -199,7 +198,7 @@ Le modèle semble fonctionner dans le terrain de jeu. Vous pouvez maintenant uti
                         new DefaultAzureCredential());
     ```
 
-1. Sous le commentaire **Obtenir un client OpenAI**, ajoutez le code suivant pour créer un objet client pour converser avec un modèle :
+1. Sous le commentaire **Définir un client OpenAI**, ajoutez le code suivant pour créer un objet client permettant de dialoguer avec un modèle :
 
     **Python**
 
@@ -223,7 +222,7 @@ Le modèle semble fonctionner dans le terrain de jeu. Vous pouvez maintenant uti
 
     ```
 
-1. Notez que le code inclut une boucle pour permettre à un utilisateur d’entrer une invite jusqu’à ce qu’il entre « quitter ». Ensuite, dans la section de boucle, sous le commentaire **Générer une image**, ajoutez le code suivant pour soumettre l'invite et récupérer l'URL de l'image générée à partir de votre modèle :
+1. Notez que le code inclut une boucle pour permettre à un utilisateur d’entrer une invite jusqu’à ce qu’il entre « quitter ». Ensuite, dans la section de boucle, sous le commentaire **Générer une image**, ajoutez le code suivant pour soumettre l’invite et récupérer l’URL de l’image générée à partir de votre modèle :
 
     **Python**
 
@@ -251,7 +250,7 @@ Le modèle semble fonctionner dans le terrain de jeu. Vous pouvez maintenant uti
    imageUrl= imageGeneration.Value.ImageUri;
     ```
 
-1. Notez que le code dans le reste de la fonction **main** transmet l’URL de l’image et un nom de fichier à une fonction fournie, qui télécharge l’image générée et l’enregistre sous forme de fichier .png.
+1. Notez que le code dans le reste de la fonction **principale** transmet l’URL de l’image et un nom de fichier à une fonction fournie, qui télécharge l’image générée et l’enregistre en tant que fichier .png.
 
 1. Utilisez la commande **Ctrl+S** pour enregistrer vos modifications dans le fichier de code, puis utilisez la commande **Ctrl+Q** pour fermer l’éditeur de code tout en gardant la ligne de commande Cloud Shell ouverte.
 
@@ -271,12 +270,12 @@ Le modèle semble fonctionner dans le terrain de jeu. Vous pouvez maintenant uti
    dotnet run
     ```
 
-1. Lorsque vous y êtes invité, entrez une requête d'image, telle que `Create an image of a robot eating pizza`. Après quelques instants, l'application doit confirmer que l'image a été enregistrée.
-1. Essayez quelques invites supplémentaires. Lorsque vous avez terminé, entrez `quit` pour quitter le programme.
+1. Lorsque vous y êtes invité, saisissez une requête d’image, telle que `Create an image of a robot eating pizza`. Après quelques instants, l’application doit confirmer que l’image a été enregistrée.
+1. Essayez d’autres invites. Lorsque vous avez terminé, entrez `quit` pour quitter le programme.
 
-    > **Remarque** : dans cette application simple, nous n'avons pas mis en place de logique pour conserver l'historique des conversations ; le modèle traitera donc chaque demande comme une nouvelle demande sans tenir compte du contexte de la demande précédente.
+    > **Note** : dans cette application simple, nous n’avons pas mis en place de logique pour conserver l’historique des conversations. Le modèle traitera donc chaque demande comme une nouvelle demande sans tenir compte du contexte de la demande précédente.
 
-1. Pour télécharger et visualiser les images générées par votre application, utilisez le bouton **Télécharger/charger des fichiers** dans la barre d'outils du volet Cloud Shell pour télécharger un fichier, puis ouvrez-le. Pour télécharger un fichier, complétez son chemin d’accès au fichier dans l’interface de téléchargement ; par exemple :
+1. Pour télécharger et visualiser les images générées par votre application, utilisez le bouton **Télécharger/charger des fichiers** dans la barre d’outils du volet Cloud Shell pour télécharger un fichier, puis ouvrez-le. Pour télécharger un fichier, saisissez son chemin d’accès au fichier dans l’interface de téléchargement, par exemple :
 
     **Python**
 
@@ -292,7 +291,7 @@ Dans cet exercice, vous avez utilisé Azure AI Foundry et le SDK Azure OpenAI po
 
 ## Nettoyage
 
-Si vous avez terminé d’explorer DALL-E, vous devez supprimer les ressources que vous avez créées dans cet exercice pour éviter d’entraîner des coûts Azure inutiles.
+Si vous avez terminé d’explorer DALL-E, vous devez supprimer les ressources que vous avez créées dans cet exercice pour éviter d’entraîner des coûts inutiles en ressources Azure.
 
 1. Revenez à l’onglet du navigateur contenant le portail Azure (ou ouvrez à nouveau le [portail Azure](https://portal.azure.com) à l’adresse `https://portal.azure.com` dans un nouvel onglet de navigateur) et affichez le contenu du groupe de ressources dans lequel vous avez déployé les ressources utilisées dans cet exercice.
 1. Dans la barre d’outils, sélectionnez **Supprimer le groupe de ressources**.
