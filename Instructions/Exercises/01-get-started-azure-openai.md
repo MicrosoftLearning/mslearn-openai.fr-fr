@@ -45,9 +45,9 @@ Azure fournit un portail web appelé **Azure AI Foundry**, que vous pouvez uti
 > **Remarque** : lorsque vous utilisez le portail Azure AI Foundry, des boîtes de message qui suggèrent des tâches à effectuer peuvent être affichées. Vous pouvez les fermer et suivre les étapes de cet exercice.
 
 1. Dans le portail Azure, sur la page **Vue d’ensemble** de votre ressource Azure OpenAI, faites défiler jusqu’à la section **Démarrer** et sélectionnez le bouton permettant d’accéder au **portail AI Foundry** (anciennement AI Studio).
-1. Dans le portail Azur AI Foundry, dans le panneau de gauche, sélectionnez la page **Déploiements** et affichez vos modèles de déploiement existants. Si vous n’en avez pas encore, créez un déploiement du modèle **gpt-35-turbo-16k** avec les paramètres suivants :
+1. Dans le portail Azur AI Foundry, dans le panneau de gauche, sélectionnez la page **Déploiements** et affichez vos modèles de déploiement existants. Si vous n’en avez pas encore, créez un déploiement du modèle **gpt-4o** avec les paramètres suivants :
     - **Nom du déploiement** : *nom unique de votre choix*
-    - **Modèle** : gpt-35-turbo-16k *(si le modèle 16k n’est pas disponible, choisissez gpt-35-turbo)*
+    - **Modèle** : gpt-4o
     - **Model version** : *utiliser la version par défaut*
     - **Type de déploiement** : Standard
     - **Limite de débit de jetons par minute** : 5 000\*
@@ -58,14 +58,14 @@ Azure fournit un portail web appelé **Azure AI Foundry**, que vous pouvez uti
 
 ## Utiliser le terrain de jeu Conversation
 
-Maintenant que vous avez déployé un modèle, vous pouvez l’utiliser pour générer des réponses basées sur des invites en langage naturel. Le terrain de jeu *Conversation* dans le portail Azure AI Foundry fournit une interface de chatbot pour les modèles GPT 3.5 et ultérieurs.
+Maintenant que vous avez déployé un modèle, vous pouvez l’utiliser pour générer des réponses basées sur des invites en langage naturel. Le terrain de jeu *Conversation* dans le portail Azure AI Foundry fournit une interface de chatbot pour les modèles GPT 4 et ultérieurs.
 
 > **Remarque :** Le terrain de jeu *Conversation* utilise l’API *ChatCompletions* plutôt que l’ancienne API *Completions* utilisée par le terrain de jeu d’*achèvements*. Le terrain de jeu d’achèvements est fourni pour la compatibilité avec les modèles plus anciens.
 
 1. Dans la section **Terrain de jeu**, sélectionnez la page **Conversation**. La page du terrain de jeu **Chat** se compose d’une rangée de boutons et de deux panneaux principaux (qui peuvent être disposés horizontalement de droite à gauche ou verticalement de haut en bas en fonction de la résolution de l’écran) :
     - **Configuration** : utilisée pour sélectionner votre déploiement, définir le message système et définir des paramètres pour interagir avec votre déploiement.
     - **Session de conversation** : utilisée pour envoyer des messages de conversation et voir les réponses.
-1. Sous **Deployments**, vérifiez que votre déploiement de modèle gpt-35-turbo-16k est sélectionné.
+1. Sous **Déploiements**, vérifiez que votre déploiement de modèle gpt-4o est sélectionné.
 1. Passez en revue le **message système** par défaut, qui doit être *Vous êtes un assistant IA qui aide les personnes à trouver des informations.* Le message système est inclus dans les invites envoyées au modèle et fournit un contexte pour les réponses du modèle ; définition des attentes quant à la façon dont un agent d’IA basé sur le modèle doit interagir avec l’utilisateur.
 1. Dans le panneau de **session de conversation**, entrez la requête utilisateur `How can I use generative AI to help me market a new product?`.
 
@@ -96,13 +96,13 @@ Jusqu’à présent, vous avez engagé une conversation instantanée avec votre 
 1. Sous la zone de texte **Message système**, développez la liste déroulante **Ajouter une section** et sélectionnez **Exemples**. Tapez ensuite le message et la réponse suivants dans les zones désignées :
 
     **Utilisateur** :
-    
+
     ```prompt
     Write an advertisement for the lightweight "Ultramop" mop, which uses patented absorbent materials to clean floors.
     ```
-    
+
     **Assistant :**
-    
+
     ```prompt
     Welcome to the future of cleaning!
     
@@ -147,7 +147,7 @@ Maintenant que vous avez exploré certaines des fonctionnalités d’un modèle 
     - **Groupe de ressources** : *groupe de ressources dans lequel vous avez provisionné votre ressource Azure OpenAI*
     - **Emplacements** : *région dans laquelle vous avez provisionné votre ressource Azure OpenAI*
     - **Plan tarifaire** : gratuit (F1) - *S’il n’est pas disponible, sélectionnez Basique (B1)*
-    - **Activez l’historique des conversations dans l’application web** : <u>Dé</u>coché
+    - **Activez l’historique des conversations dans l’application web** : **Dé**coché
     - **Je reconnais que les applications web entraîneront l’utilisation de mon compte** : sélectionné
 1. Déployez la nouvelle application web et attendez que le déploiement se termine (ce qui peut prendre 10 minutes environ)
 1. Une fois que votre application web a été déployée avec succès, utilisez le bouton en haut à droite de la page du terrain de jeu **Conversation** pour lancer l’application web. Le lancement de l’application peut prendre plusieurs minutes. Si vous y êtes invité, acceptez la demande d’autorisations.
