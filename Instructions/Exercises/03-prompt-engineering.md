@@ -45,9 +45,9 @@ Azure fournit un portail web appelé **Azure AI Foundry**, que vous pouvez uti
 > **Remarque** : lorsque vous utilisez le portail Azure AI Foundry, des boîtes de message qui suggèrent des tâches à effectuer peuvent être affichées. Vous pouvez les fermer et suivre les étapes de cet exercice.
 
 1. Dans le portail Azure, sur la page **Vue d’ensemble** de votre ressource Azure OpenAI, faites défiler jusqu’à la section **Démarrer** et sélectionnez le bouton permettant d’accéder au **portail AI Foundry** (anciennement AI Studio).
-1. Dans le portail Azur AI Foundry, dans le panneau de gauche, sélectionnez la page **Déploiements** et affichez vos modèles de déploiement existants. Si vous n’en avez pas encore, créez un déploiement du modèle **gpt-35-turbo-16k** avec les paramètres suivants :
+1. Dans le portail Azur AI Foundry, dans le panneau de gauche, sélectionnez la page **Déploiements** et affichez vos modèles de déploiement existants. Si vous n’en avez pas encore, créez un déploiement du modèle **gpt-4o** avec les paramètres suivants :
     - **Nom du déploiement** : *nom unique de votre choix*
-    - **Modèle** : gpt-35-turbo-16k *(si le modèle 16k n’est pas disponible, choisissez gpt-35-turbo)*
+    - **Modèle** : gpt-4o
     - **Model version** : *utiliser la version par défaut*
     - **Type de déploiement** : Standard
     - **Limite de débit de jetons par minute** : 5 000\*
@@ -63,9 +63,9 @@ Commençons par explorer quelques techniques d’ingénierie rapide dans Chat Pl
 1. Dans le volet gauche, dans la section **Terrains de jeu**, sélectionnez la page **Conversation**. La page du terrain de jeu **Chat** se compose d’une rangée de boutons et de deux panneaux principaux (qui peuvent être disposés horizontalement de droite à gauche ou verticalement de haut en bas en fonction de la résolution de l’écran) :
     - **Configuration** : utilisée pour sélectionner votre déploiement, définir le message système et définir des paramètres pour interagir avec votre déploiement.
     - **Historique des conversations** : utilisée pour envoyer des messages de conversation et voir les réponses.
-2. Sous **Déploiements**, vérifiez que votre déploiement de modèle gpt-35-turbo-16k est sélectionné.
+1. Sous **Déploiement**, vérifiez que votre déploiement de modèle gpt-4o est sélectionné.
 1. Vérifiez le message système par défaut contenu dans la zone de texte immédiatement sous le déploiement sélectionné, qui devrait être *Vous êtes un assistant IA qui aide les gens à trouver des informations.*
-4. Dans l’**historique des conversations**, soumettez la requête suivante :
+1. Dans l’**historique des conversations**, soumettez la requête suivante :
 
     ```prompt
     What kind of article is this?
@@ -81,12 +81,12 @@ Commençons par explorer quelques techniques d’ingénierie rapide dans Chat Pl
 
     La réponse fournit une description de l’article. Toutefois, supposons que vous souhaitez un format plus spécifique pour la catégorisation d’article.
 
-5. Dans la section **Configuration**, remplacez le message système par `You are a news aggregator that categorizes news articles.`
+1. Dans la section **Configuration**, remplacez le message système par `You are a news aggregator that categorizes news articles.`
 
-6. Sous le nouveau message système, sélectionnez le bouton **Add section** et choisissez **Examples**. Ajoutez ensuite l’exemple suivant.
+1. Sous le nouveau message système, sélectionnez le bouton **Add section** et choisissez **Examples**. Ajoutez ensuite l’exemple suivant.
 
     **Utilisateur** :
-    
+
     ```prompt
     What kind of article is this?
     ---
@@ -98,17 +98,17 @@ Commençons par explorer quelques techniques d’ingénierie rapide dans Chat Pl
     
     The Chicago Cyclones' two hits came in the 2nd and the 5th innings but were unable to get the runner home to score.
     ```
-    
+
     **Assistant :**
-    
+
     ```prompt
     Sports
       ```
 
-7. Ajoutez un autre exemple avec le texte suivant.
+1. Ajoutez un autre exemple avec le texte suivant.
 
     **Utilisateur :**
-    
+
     ```prompt
     Categorize this article:
     ---
@@ -121,16 +121,16 @@ Commençons par explorer quelques techniques d’ingénierie rapide dans Chat Pl
     
     From Robin Kline's history-making win to a full performance by none other than Casey Jensen herself, don't miss tomorrows rerun of all the festivities.
     ```
-    
+
     **Assistant :**
-    
+
     ```prompt
     Entertainment
     ```
 
-8. Utilisez le bouton **Appliquer les modifications** sous la zone de texte du message système de la section **Configuration** pour enregistrer vos modifications.
+1. Utilisez le bouton **Appliquer les modifications** sous la zone de texte du message système de la section **Configuration** pour enregistrer vos modifications.
 
-9. Dans la section **Historique des conversations**, renvoyez l’invite suivante :
+1. Dans la section **Historique des conversations**, renvoyez l’invite suivante :
 
     ```prompt
     What kind of article is this?
@@ -146,9 +146,9 @@ Commençons par explorer quelques techniques d’ingénierie rapide dans Chat Pl
 
     La combinaison d’un message système plus spécifique et de quelques exemples de requêtes et de réponses attendues entraîne un format cohérent pour les résultats.
 
-10. Remplacez le message système par le modèle par défaut, qui doit être `You are an AI assistant that helps people find information.` sans exemples. Ensuite, appliquez les modifications.
+1. Remplacez le message système par le modèle par défaut, qui doit être `You are an AI assistant that helps people find information.` sans exemples. Ensuite, appliquez les modifications.
 
-11. Dans l’**historique des conversations**, soumettez l’invite suivante :
+1. Dans l’**historique des conversations**, soumettez l’invite suivante :
 
     ```prompt
     # 1. Create a list of animals
@@ -158,10 +158,10 @@ Commençons par explorer quelques techniques d’ingénierie rapide dans Chat Pl
 
     Le modèle donnera probablement une réponse pour satisfaire le prompt, sous la forme d’une liste numérotée. Il s’agit d’une réponse appropriée, mais supposons que vous vouliez réellement que le modèle écrive un programme Python qui effectue les tâches que vous avez décrites ?
 
-12. Modifiez le message système en `You are a coding assistant helping write python code.` et appliquez les modifications.
-13. Renvoyez l’invite suivante au modèle :
+1. Modifiez le message système en `You are a coding assistant helping write python code.` et appliquez les modifications.
+1. Renvoyez l’invite suivante au modèle :
 
-    ```
+    ```prompt
     # 1. Create a list of animals
     # 2. Create a list of whimsical names for those animals
     # 3. Combine them randomly into a list of 25 animal and name pairs
@@ -176,7 +176,7 @@ Examinons maintenant l’utilisation de l’ingénierie d’invite dans une appl
 > **Conseil** : Si vous avez déjà cloné le dépôt **mslearn-openai**, ouvrez-le dans Visual Studio Code. Dans le cas contraire, procédez comme suit pour le cloner dans votre environnement de développement.
 
 1. Démarrez Visual Studio Code.
-2. Ouvrez la palette (Maj+CTRL+P) et exécutez une commande **Git : Cloner** pour cloner le référentiel `https://github.com/MicrosoftLearning/mslearn-openai` vers un dossier local (peu importe quel dossier).
+2. Ouvrez la palette (Maj+CTRL+P) ou **Affichage** > **Palette de commandes...** et exécutez une commande **Git: Clone** pour cloner le référentiel `https://github.com/MicrosoftLearning/mslearn-openai` vers un dossier local (peu importe quel dossier).
 3. Lorsque le référentiel a été cloné, ouvrez le dossier dans Visual Studio Code.
 
     > **Remarque** : Si Visual Studio Code affiche un message contextuel qui vous invite à approuver le code que vous ouvrez, cliquez sur l’option **Oui, je fais confiance aux auteurs** dans la fenêtre contextuelle.
@@ -194,21 +194,21 @@ Les applications pour C# et Python ont été fournies, et les deux applications 
 
     **C# :**
 
-    ```
-    dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.14
+    ```powershell
+    dotnet add package Azure.AI.OpenAI --version 2.1.0
     ```
 
     **Python** :
 
-    ```
-    pip install openai==1.55.3
+    ```powershell
+    pip install openai==1.65.2
     ```
 
 3. Dans le volet **Explorateur**, dans le dossier **CSharp** ou **Python**, ouvrez le fichier de configuration pour le langage de votre choix
 
     - **C#** : appsettings.json
     - **Python** : .env
-    
+
 4. Mettez à jour les valeurs de configuration pour inclure :
     - Le **point de terminaison** et une **clé** de la ressource Azure OpenAI que vous avez créée (disponible sur la page **Clés et point de terminaison** de votre ressource Azure OpenAI dans le portail Azure).
     - Le **nom de déploiement** que vous avez spécifié pour votre modèle de déploiement (disponible sur la page **Déploiements** dans le portail Azure AI Foundry).
@@ -225,6 +225,7 @@ Vous êtes maintenant prêt à utiliser le Kit de développement logiciel (SDK) 
     ```csharp
     // Add Azure OpenAI package
     using Azure.AI.OpenAI;
+    using OpenAI.Chat;
     ```
 
     **Python** : prompt-engineering.py
@@ -240,7 +241,8 @@ Vous êtes maintenant prêt à utiliser le Kit de développement logiciel (SDK) 
 
     ```csharp
     // Configure the Azure OpenAI client
-    OpenAIClient client = new OpenAIClient(new Uri(oaiEndpoint), new AzureKeyCredential(oaiKey));
+    AzureOpenAIClient azureClient = new (new Uri(oaiEndpoint), new ApiKeyCredential(oaiKey));
+    ChatClient chatClient = azureClient.GetChatClient(oaiDeploymentName);
     ```
 
     **Python** : prompt-engineering.py
@@ -260,20 +262,19 @@ Vous êtes maintenant prêt à utiliser le Kit de développement logiciel (SDK) 
 
     ```csharp
     // Format and send the request to the model
-    var chatCompletionsOptions = new ChatCompletionsOptions()
+    var chatCompletionsOptions = new ChatCompletionOptions()
     {
-        Messages =
-        {
-            new ChatRequestSystemMessage(systemMessage),
-            new ChatRequestUserMessage(userMessage)
-        },
         Temperature = 0.7f,
-        MaxTokens = 800,
-        DeploymentName = oaiDeploymentName
+        MaxOutputTokenCount = 800
     };
     
     // Get response from Azure OpenAI
-    Response<ChatCompletions> response = await client.GetChatCompletionsAsync(chatCompletionsOptions);
+    ChatCompletion response = await chatClient.CompleteChatAsync(
+        [
+            new SystemChatMessage(systemMessage),
+            new UserChatMessage(userMessage),
+        ],
+        chatCompletionsOptions);
     ```
 
     **Python** : prompt-engineering.py

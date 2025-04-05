@@ -45,9 +45,9 @@ Azure fournit un portail web appelé **Azure AI Foundry**, que vous pouvez uti
 > **Remarque** : lorsque vous utilisez le portail Azure AI Foundry, des boîtes de message qui suggèrent des tâches à effectuer peuvent être affichées. Vous pouvez les fermer et suivre les étapes de cet exercice.
 
 1. Dans le portail Azure, sur la page **Vue d’ensemble** de votre ressource Azure OpenAI, faites défiler jusqu’à la section **Démarrer** et sélectionnez le bouton permettant d’accéder au **portail AI Foundry** (anciennement AI Studio).
-1. Dans le portail Azur AI Foundry, dans le panneau de gauche, sélectionnez la page **Déploiements** et affichez vos modèles de déploiement existants. Si vous n’en avez pas encore, créez un déploiement du modèle **gpt-35-turbo-16k** avec les paramètres suivants :
+1. Dans le portail Azur AI Foundry, dans le panneau de gauche, sélectionnez la page **Déploiements** et affichez vos modèles de déploiement existants. Si vous n’en avez pas encore, créez un déploiement du modèle **gpt-4o** avec les paramètres suivants :
     - **Nom du déploiement** : *nom unique de votre choix*
-    - **Modèle** : gpt-35-turbo-16k *(si le modèle 16k n’est pas disponible, choisissez gpt-35-turbo)*
+    - **Modèle** : gpt-4o
     - **Model version** : *utiliser la version par défaut*
     - **Type de déploiement** : Standard
     - **Limite de débit de jetons par minute** : 5 000\*
@@ -67,7 +67,7 @@ Avant de l’utiliser dans votre application, examinez comment Azure OpenAI peut
 1. Dans la zone **Message système**, définissez le message système sur `You are a programming assistant helping write code` et appliquez les modifications.
 1. Dans la **session de conversation**, soumettez la requête suivante :
 
-    ```
+    ```prompt
     Write a function in python that takes a character and a string as input, and returns how many times the character appears in the string
     ```
 
@@ -79,7 +79,7 @@ Avant de l’utiliser dans votre application, examinez comment Azure OpenAI peut
 
 1. Nous allons ensuite explorer l’utilisation de l’IA pour comprendre le code. Soumettez le prompt suivant comme message utilisateur.
 
-    ```
+    ```prompt
     What does the following function do?  
     ---  
     def multiply(a, b):  
@@ -105,11 +105,11 @@ Avant de l’utiliser dans votre application, examinez comment Azure OpenAI peut
 
     Le modèle doit décrire ce que fait la fonction, qui est de multiplier deux nombres en utilisant une boucle.
 
-7. Soumettez le prompt `Can you simplify the function?`.
+1. Soumettez le prompt `Can you simplify the function?`.
 
     Le modèle doit écrire une version plus simple de la fonction.
 
-8. Soumettez le prompt : `Add some comments to the function.`
+1. Soumettez le prompt : `Add some comments to the function.`
 
     Le modèle ajoute des commentaires au code.
 
@@ -120,7 +120,7 @@ Examinons maintenant comment créer une application personnalisée qui utilise l
 > **Conseil** : Si vous avez déjà cloné le dépôt **mslearn-openai**, ouvrez-le dans Visual Studio Code. Dans le cas contraire, procédez comme suit pour le cloner dans votre environnement de développement.
 
 1. Démarrez Visual Studio Code.
-2. Ouvrez la palette (Maj+CTRL+P) et exécutez une commande **Git : Cloner** pour cloner le référentiel `https://github.com/MicrosoftLearning/mslearn-openai` vers un dossier local (peu importe quel dossier).
+2. Ouvrez la palette de commandes (Maj+CTRL+P) ou **Affichage** > **Palette de commandes...** et exécutez une commande **Git: Clone** pour cloner le référentiel `https://github.com/MicrosoftLearning/mslearn-openai` vers un dossier local (peu importe quel dossier).
 3. Lorsque le référentiel a été cloné, ouvrez le dossier dans Visual Studio Code.
 
     > **Remarque** : Si Visual Studio Code affiche un message contextuel qui vous invite à approuver le code que vous ouvrez, cliquez sur l’option **Oui, je fais confiance aux auteurs** dans la fenêtre contextuelle.
@@ -138,21 +138,21 @@ Des applications pour C# et Python sont fournies, ainsi qu’un exemple de fichi
 
     **C# :**
 
-    ```
-    dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.14
+    ```powershell
+    dotnet add package Azure.AI.OpenAI --version 2.1.0
     ```
 
     **Python** :
 
-    ```
-    pip install openai==1.55.3
+    ```powershell
+    pip install openai==1.65.2
     ```
 
 3. Dans le volet **Explorateur**, dans le dossier **CSharp** ou **Python**, ouvrez le fichier de configuration pour le langage de votre choix
 
     - **C#** : appsettings.json
     - **Python** : .env
-    
+
 4. Mettez à jour les valeurs de configuration pour inclure :
     - Le **point de terminaison** et une **clé** de la ressource Azure OpenAI que vous avez créée (disponible sur la page **Clés et point de terminaison** de votre ressource Azure OpenAI dans le portail Azure).
     - Le **nom de déploiement** que vous avez spécifié pour votre modèle de déploiement (disponible sur la page **Déploiements** dans le portail Azure AI Foundry).
@@ -168,23 +168,19 @@ Vous êtes maintenant prêt à utiliser le Kit de développement logiciel (SDK) 
 
     ```csharp
     // Format and send the request to the model
-    var chatCompletionsOptions = new ChatCompletionsOptions()
+    var chatCompletionsOptions = new ChatCompletionOptions()
     {
-        Messages =
-        {
-            new ChatRequestSystemMessage(systemPrompt),
-            new ChatRequestUserMessage(userPrompt)
-        },
         Temperature = 0.7f,
-        MaxTokens = 1000,
-        DeploymentName = oaiDeploymentName
+        MaxOutputTokenCount = 800
     };
-
+    
     // Get response from Azure OpenAI
-    Response<ChatCompletions> response = await client.GetChatCompletionsAsync(chatCompletionsOptions);
-
-    ChatCompletions completions = response.Value;
-    string completion = completions.Choices[0].Message.Content;
+    ChatCompletion response = await chatClient.CompleteChatAsync(
+        [
+            new SystemChatMessage(systemPrompt),
+            new UserChatMessage(userPrompt),
+        ],
+        chatCompletionsOptions);
     ```
 
     **Python** : code-generation.py
@@ -205,7 +201,7 @@ Vous êtes maintenant prêt à utiliser le Kit de développement logiciel (SDK) 
     )
     ```
 
-4. Enregistrez les modifications apportées au fichier de code.
+1. Enregistrez les modifications apportées au fichier de code.
 
 ## Exécution de l'application
 
@@ -249,7 +245,7 @@ Maintenant que votre application est configurée, exécutez-la pour essayer de g
     - **Python** : Les corrections sont apportées aux lignes 18 et 31
 
     L’application pour Go Fish dans **sample-code** peut être exécutée si vous remplacez les lignes contenant les bogues par la réponse d’Azure OpenAI. Si vous l’exécutez sans les corrections, elle ne fonctionnera pas bien.
-    
+
     > **Remarque** : Il est important de noter que même si des éléments de syntaxe du code de cette application Go Fish ont été corrigés, il ne s’agit pas d’une représentation strictement exacte du jeu. Si vous regardez de près, il y a des problèmes comme l’absence de vérification si le paquet est vide lors du tirage des cartes, l’absence de suppression des paires de la main des joueurs lorsqu’ils ont une paire, et quelques autres bogues qui demandent de comprendre les jeux de cartes pour les détecter. Il s’agit d’un très bon exemple montrant comment les modèles d’IA générative peuvent être utiles dans la génération de code, mais ils ne peuvent pas être considérés d’emblée comme corrects et doivent être vérifiés par le développeur.
 
     Si vous voulez voir la réponse complète d’Azure OpenAI, vous pouvez définir la variable **printFullResponse** sur `True`, puis réexécuter l’application.
