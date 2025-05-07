@@ -21,16 +21,13 @@ Si vous n’en avez pas déjà une, approvisionnez une ressource Azure OpenAI da
     - **Abonnement** : *Sélectionner un abonnement Azure approuvé pour l’accès à Azure OpenAI Service*
     - **Groupe de ressources** : *sélectionnez ou créez un groupe de ressources*.
     - **Région** : *Choisir de manière **aléatoire** une région parmi les suivantes*\*
-        - Australie Est
-        - Est du Canada
         - USA Est
         - USA Est 2
-        - France Centre
-        - Japon Est
         - Centre-Nord des États-Unis
+        - États-Unis - partie centrale méridionale
         - Suède Centre
-        - Suisse Nord
-        - Sud du Royaume-Uni
+        - USA Ouest
+        - USA Ouest 3
     - **Nom** : *un nom unique de votre choix*
     - **Niveau tarifaire** : Standard S0
 

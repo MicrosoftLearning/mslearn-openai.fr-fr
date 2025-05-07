@@ -33,15 +33,13 @@ Si vous n’en avez pas déjà une, approvisionnez une ressource Azure OpenAI da
     - **Abonnement** : *Sélectionner un abonnement Azure approuvé pour l’accès à Azure OpenAI Service*
     - **Groupe de ressources** : *sélectionnez ou créez un groupe de ressources*.
     - **Région** : *Choisir de manière **aléatoire** une région parmi les suivantes*\*
-        - Est du Canada
         - USA Est
         - USA Est 2
-        - France Centre
-        - Japon Est
         - Centre-Nord des États-Unis
+        - États-Unis - partie centrale méridionale
         - Suède Centre
-        - Suisse Nord
-        - Sud du Royaume-Uni
+        - USA Ouest
+        - USA Ouest 3
     - **Nom** : *un nom unique de votre choix*
     - **Niveau tarifaire** : Standard S0
 
@@ -51,19 +49,25 @@ Si vous n’en avez pas déjà une, approvisionnez une ressource Azure OpenAI da
 
 ## Déployer un modèle
 
-Ensuite, vous allez déployer une ressource de modèle Azure OpenAI à partir de l’interface CLI. Reportez-vous à cet exemple et remplacez les variables suivantes par vos propres valeurs ci-dessus :
+Ensuite, vous allez déployer une ressource de modèle Azure OpenAI à partir de Cloud Shell.
 
-```dotnetcli
-az cognitiveservices account deployment create \
-   -g <your_resource_group> \
-   -n <your_OpenAI_service> \
-   --deployment-name gpt-4o \
-   --model-name gpt-4o \
-   --model-version 2024-05-13 \
-   --model-format OpenAI \
-   --sku-name "Standard" \
-   --sku-capacity 5
-```
+1. Cliquez sur le bouton **[\>_]** à droite de la barre de recherche, en haut de la page, pour créer un Cloud Shell dans le portail Azure, puis sélectionnez un environnement ***Bash***. Cloud Shell fournit une interface de ligne de commande dans un volet situé en bas du portail Azure.
+
+    > **Note** : si vous avez déjà créé un Cloud Shell qui utilise un environnement *PowerShel*, basculez-le vers ***Bash***.
+
+1. Reportez-vous à cet exemple et remplacez les variables suivantes par vos propres valeurs ci-dessus :
+
+    ```dotnetcli
+    az cognitiveservices account deployment create \
+       -g <your_resource_group> \
+       -n <your_OpenAI_service> \
+       --deployment-name gpt-4o \
+       --model-name gpt-4o \
+       --model-version 2024-05-13 \
+       --model-format OpenAI \
+       --sku-name "Standard" \
+       --sku-capacity 5
+    ```
 
 > **Note** : la capacité de référence SKU est mesurée en milliers de jetons par minute. Une limite de débit de 5 000 jetons par minute est plus que suffisante pour effectuer cet exercice tout en permettant à d’autres personnes d’utiliser le même abonnement.
 
@@ -245,7 +249,7 @@ Maintenant que votre application a été configurée, exécutez-la pour envoyer 
     - Rescue name is Contoso 
     - It specializes in elephants, as well as zebras and giraffes 
     - Call for donations to be given at our website 
-    \n Include a list of the current animals we have at our rescue after the signature, in the form of a table. These animals include elephants, zebras, gorillas, lizards, and jackrabbits.
+    Include a list of the current animals we have at our rescue after the signature, in the form of a table. These animals include elephants, zebras, gorillas, lizards, and jackrabbits.
     ```
 
 1. Observez la sortie et découvrez comment l’e-mail a changé en fonction de vos instructions claires.
@@ -264,7 +268,7 @@ Maintenant que votre application a été configurée, exécutez-la pour envoyer 
     - Rescue name is Contoso 
     - It specializes in elephants, as well as zebras and giraffes 
     - Call for donations to be given at our website 
-    \n Include a list of the current animals we have at our rescue after the signature, in the form of a table. These animals include elephants, zebras, gorillas, lizards, and jackrabbits.
+    Include a list of the current animals we have at our rescue after the signature, in the form of a table. These animals include elephants, zebras, gorillas, lizards, and jackrabbits.
     ```
 
 1. Observez la sortie. Cette fois, vous verrez probablement l’e-mail dans un format similaire, mais avec un ton beaucoup plus informel. Vous verrez probablement même des blagues !
